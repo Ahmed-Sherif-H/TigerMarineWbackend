@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  image       String?
+  heroImage   String?
+  order       Int      @default(0)
+  models      Model[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Model {
+  id                  Int      @id @default(autoincrement())
+  categoryId          Int
+  category            Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name                String
+  description         String?  @db.Text
+  shortDescription    String?
+  imageFile           String?
+  heroImageFile       String?
+  contentImageFile    String?
+  section2Title       String?
+  section2Description String?  @db.Text
+  specs               Spec[]
+  features            Feature[]
+  optionalFeatures    OptionalFeature[]
+  galleryImages       GalleryImage[]
+  videoFiles          VideoFile[]
+  interiorFiles       InteriorFile[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@unique([categoryId, name])
+  @@index([categoryId])
+}
+
+model Spec {
+  id        Int      @id @default(autoincrement())
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  key       String
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([modelId, key])
+  @@index([modelId])
+}
+
+model Feature {
+  id        Int      @id @default(autoincrement())
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  feature   String   @db.Text
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+model OptionalFeature {
+  id          Int      @id @default(autoincrement())
+  modelId     Int
+  model       Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  name        String
+  description String?  @db.Text
+  category    String?
+  price       String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  filename  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+model VideoFile {
+  id        Int      @id @default(autoincrement())
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  filename  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+model InteriorFile {
+  id        Int      @id @default(autoincrement())
+  modelId   Int
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  filename  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([modelId])
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String   // hashed password
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inquiry {
+  id              Int      @id @default(autoincrement())
+  type            String   // 'contact' or 'customizer'
+  name            String
+  email           String
+  phone           String?
+  subject         String?
+  message         String?  @db.Text
+  modelName       String?
+  selectedColors  String?  @db.Text // JSON string of selected colors
+  selectedFeatures String? @db.Text // JSON string of selected features
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([email])
+  @@index([type])
+  @@index([createdAt])
+}
+
