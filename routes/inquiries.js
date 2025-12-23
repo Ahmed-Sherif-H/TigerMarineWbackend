@@ -6,7 +6,16 @@ const { sendContactEmail, sendCustomizerInquiry } = require('../services/emailSe
 // Submit contact form
 router.post('/contact', async (req, res) => {
   console.log('📧 Contact form request received');
-  console.log('  Body:', { ...req.body, message: req.body.message ? '...' : null });
+  console.log('  Method:', req.method);
+  console.log('  Headers:', req.headers['content-type']);
+  console.log('  Body keys:', Object.keys(req.body));
+  console.log('  Body:', { 
+    name: req.body.name ? '...' : null,
+    email: req.body.email ? '...' : null,
+    phone: req.body.phone ? '...' : null,
+    subject: req.body.subject ? '...' : null,
+    hasMessage: !!req.body.message
+  });
   
   try {
     const { name, email, phone, subject, message } = req.body;

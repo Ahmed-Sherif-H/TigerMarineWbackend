@@ -32,31 +32,59 @@ const handleMulterError = (err, req, res, next) => {
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    const { folder, modelName, categoryName } = req.body;
-    
-    let uploadPath;
-    if (folder === 'customizer') {
-      // Customizer images: public/Customizer-images/[ModelName]/[PartName]/    
-      const { partName } = req.body;
-      uploadPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);                                                                    
-    } else if (folder === 'categories') {
-      // Category images: public/images/categories/[CategoryName]/
-      uploadPath = path.join(__dirname, '../public/images/categories', categoryName || 'default');
-    } else {
-      // Regular images: public/images/[ModelName]/
-      const basePath = path.join(__dirname, '../public/images', modelName);
-      const { subfolder } = req.body;
-      if (subfolder === 'Interior') {
-        // Interior images: public/images/[ModelName]/Interior/
-        uploadPath = path.join(basePath, 'Interior');
-      } else {
-        uploadPath = basePath;
+    try {
+      console.log('📁 Determining upload destination...');
+      console.log('  Request body:', req.body);
+      
+      const { folder, modelName, categoryName } = req.body;
+      
+      if (!folder) {
+        return cb(new Error('Folder is required'));
       }
+      
+      let uploadPath;
+      
+      if (folder === 'customizer') {
+        // Customizer images: public/Customizer-images/[ModelName]/[PartName]/
+        const { partName } = req.body;
+        if (!modelName || !partName) {
+          return cb(new Error('modelName and partName are required for customizer uploads'));
+        }
+        uploadPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);
+      } else if (folder === 'categories') {
+        // Category images: public/images/categories/[CategoryName]/
+        if (!categoryName) {
+          return cb(new Error('categoryName is required for category uploads'));
+        }
+        uploadPath = path.join(__dirname, '../public/images/categories', categoryName);
+      } else if (folder === 'images') {
+        // Regular images: public/images/[ModelName]/
+        if (!modelName || modelName.trim() === '') {
+          console.error('❌ modelName is missing or empty');
+          return cb(new Error('modelName is required for image uploads'));
+        }
+        const basePath = path.join(__dirname, '../public/images', String(modelName).trim());
+        const { subfolder } = req.body;
+        if (subfolder === 'Interior') {
+          // Interior images: public/images/[ModelName]/Interior/
+          uploadPath = path.join(basePath, 'Interior');
+        } else {
+          uploadPath = basePath;
+        }
+      } else {
+        console.error('❌ Unknown folder type:', folder);
+        return cb(new Error(`Unknown folder type: ${folder}`));
+      }
+      
+      console.log('  Upload path:', uploadPath);
+      
+      // Create directory if it doesn't exist
+      await fs.ensureDir(uploadPath);
+      cb(null, uploadPath);
+    } catch (error) {
+      console.error('❌ Error determining destination:', error);
+      cb(error);
     }
-    
-    // Create directory if it doesn't exist
-    await fs.ensureDir(uploadPath);
-    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     // Keep original filename
