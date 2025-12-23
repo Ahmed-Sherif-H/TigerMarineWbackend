@@ -34,12 +34,34 @@ const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
     try {
       console.log('📁 Determining upload destination...');
-      console.log('  Request body:', req.body);
+      console.log('  File:', file.originalname);
       
-      const { folder, modelName, categoryName } = req.body;
+      // Get fields from req.body (multer parses them)
+      // Note: In multipart/form-data, multer should parse fields before calling destination
+      // But sometimes fields aren't available yet, so we check req.body
+      const body = req.body || {};
+      
+      console.log('  Body keys:', Object.keys(body));
+      console.log('  Body values:', Object.entries(body).map(([k, v]) => [k, typeof v === 'string' && v.length > 100 ? v.substring(0, 100) + '...' : v]));
+      
+      const folder = body.folder;
+      const modelName = body.modelName;
+      const categoryName = body.categoryName;
+      
+      console.log('  Extracted from body:', { 
+        folder: folder || 'MISSING', 
+        modelName: modelName || 'MISSING', 
+        categoryName: categoryName || 'MISSING' 
+      });
+      console.log('  All body keys:', Object.keys(body));
+      console.log('  Body values:', Object.entries(body).map(([k, v]) => [k, typeof v === 'string' && v.length > 50 ? v.substring(0, 50) + '...' : v]));
       
       if (!folder) {
-        return cb(new Error('Folder is required'));
+        console.error('❌ Folder is missing from request body');
+        console.error('  Body is:', body);
+        console.error('  Body type:', typeof body);
+        console.error('  Body keys:', Object.keys(body));
+        return cb(new Error('Folder is required. Make sure "folder" field is included in FormData and sent before the file.'));
       }
       
       let uploadPath;
@@ -98,6 +120,10 @@ const upload = multer({
     fileSize: 50 * 1024 * 1024 // 50MB limit
   },
   fileFilter: (req, file, cb) => {
+    // Log when fileFilter is called
+    console.log('🔍 File filter called for:', file.originalname);
+    console.log('  Body at filter time:', req.body);
+    
     // Allow images and videos
     const allowedTypes = /jpeg|jpg|png|gif|webp|mp4|mov|avi/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -113,18 +139,40 @@ const upload = multer({
 
 // Upload single file
 router.post('/single', (req, res, next) => {
+  // Log incoming request
+  console.log('📤 Upload request received');
+  console.log('  Content-Type:', req.headers['content-type']);
+  
   upload.single('file')(req, res, (err) => {
     if (err) {
+      console.error('❌ Multer error in upload:', err.message);
       return handleMulterError(err, req, res, next);
     }
     next();
   });
 }, (req, res) => {
-  console.log('📤 Upload request received');
+  console.log('📤 Upload handler - after multer');
   console.log('  Body:', req.body);
   console.log('  File:', req.file ? { name: req.file.originalname, size: req.file.size } : 'No file');
   
   try {
+    // Validate folder is present (should be in req.body after multer processes it)
+    const folder = req.body?.folder;
+    if (!folder) {
+      console.error('❌ Folder is missing from request');
+      console.error('  Body keys:', Object.keys(req.body || {}));
+      console.error('  Body:', req.body);
+      return res.status(400).json({ 
+        success: false,
+        error: 'Folder is required. Make sure "folder" field is included in FormData.',
+        received: {
+          body: req.body,
+          bodyKeys: Object.keys(req.body || {}),
+          hasFile: !!req.file
+        }
+      });
+    }
+    
     if (!req.file) {
       console.error('❌ No file in request');
       return res.status(400).json({ 
@@ -137,12 +185,20 @@ router.post('/single', (req, res, next) => {
       });
     }
     
-    console.log('✅ File uploaded successfully:', req.file.filename);
+    // File was already saved by multer to the destination determined earlier
+    // But if destination failed, req.file.path might not be set correctly
+    // So we need to verify the file was saved
+    const filePath = req.file.path;
+    const fileName = req.file.filename;
+    
+    console.log('✅ File uploaded successfully:', fileName);
+    console.log('  Saved to:', filePath);
+    
     res.json({
       success: true,
       message: 'File uploaded successfully',
-      filename: req.file.filename,
-      path: req.file.path,
+      filename: fileName,
+      path: filePath,
       size: req.file.size
     });
   } catch (error) {
