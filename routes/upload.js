@@ -83,32 +83,15 @@ const upload = multer({
   }
 });
 
-// Error handler for multer
-const handleMulterError = (err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    console.error('❌ Multer error:', err.code, err.message);
-    if (err.code === 'LIMIT_FILE_SIZE') {
-      return res.status(400).json({
-        success: false,
-        error: 'File too large. Maximum size is 50MB.'
-      });
-    }
-    return res.status(400).json({
-      success: false,
-      error: `Upload error: ${err.message}`
-    });
-  } else if (err) {
-    console.error('❌ Upload error:', err.message);
-    return res.status(400).json({
-      success: false,
-      error: err.message || 'Upload failed'
-    });
-  }
-  next();
-};
-
 // Upload single file
-router.post('/single', upload.single('file'), handleMulterError, (req, res) => {
+router.post('/single', (req, res, next) => {
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      return handleMulterError(err, req, res, next);
+    }
+    next();
+  });
+}, (req, res) => {
   console.log('📤 Upload request received');
   console.log('  Body:', req.body);
   console.log('  File:', req.file ? { name: req.file.originalname, size: req.file.size } : 'No file');
@@ -146,7 +129,14 @@ router.post('/single', upload.single('file'), handleMulterError, (req, res) => {
 });
 
 // Upload multiple files
-router.post('/multiple', upload.array('files', 20), handleMulterError, (req, res) => {
+router.post('/multiple', (req, res, next) => {
+  upload.array('files', 20)(req, res, (err) => {
+    if (err) {
+      return handleMulterError(err, req, res, next);
+    }
+    next();
+  });
+}, (req, res) => {
   console.log('📤 Multiple upload request received');
   console.log('  Body:', req.body);
   console.log('  Files:', req.files ? req.files.length : 0);
