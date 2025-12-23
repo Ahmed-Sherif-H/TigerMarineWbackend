@@ -5,6 +5,30 @@ const fs = require('fs-extra');
 
 const router = express.Router();
 
+// Error handler for multer
+const handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    console.error('❌ Multer error:', err.code, err.message);
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({
+        success: false,
+        error: 'File too large. Maximum size is 50MB.'
+      });
+    }
+    return res.status(400).json({
+      success: false,
+      error: `Upload error: ${err.message}`
+    });
+  } else if (err) {
+    console.error('❌ Upload error:', err.message);
+    return res.status(400).json({
+      success: false,
+      error: err.message || 'Upload failed'
+    });
+  }
+  next();
+};
+
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
@@ -59,13 +83,50 @@ const upload = multer({
   }
 });
 
+// Error handler for multer
+const handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    console.error('❌ Multer error:', err.code, err.message);
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({
+        success: false,
+        error: 'File too large. Maximum size is 50MB.'
+      });
+    }
+    return res.status(400).json({
+      success: false,
+      error: `Upload error: ${err.message}`
+    });
+  } else if (err) {
+    console.error('❌ Upload error:', err.message);
+    return res.status(400).json({
+      success: false,
+      error: err.message || 'Upload failed'
+    });
+  }
+  next();
+};
+
 // Upload single file
-router.post('/single', upload.single('file'), (req, res) => {
+router.post('/single', upload.single('file'), handleMulterError, (req, res) => {
+  console.log('📤 Upload request received');
+  console.log('  Body:', req.body);
+  console.log('  File:', req.file ? { name: req.file.originalname, size: req.file.size } : 'No file');
+  
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      console.error('❌ No file in request');
+      return res.status(400).json({ 
+        success: false,
+        error: 'No file uploaded',
+        received: {
+          body: req.body,
+          hasFile: !!req.file
+        }
+      });
     }
     
+    console.log('✅ File uploaded successfully:', req.file.filename);
     res.json({
       success: true,
       message: 'File uploaded successfully',
@@ -74,16 +135,29 @@ router.post('/single', upload.single('file'), (req, res) => {
       size: req.file.size
     });
   } catch (error) {
-    console.error('Upload error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Upload error:', error);
+    console.error('  Stack:', error.stack);
+    res.status(500).json({ 
+      success: false,
+      error: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 
 // Upload multiple files
-router.post('/multiple', upload.array('files', 20), (req, res) => {
+router.post('/multiple', upload.array('files', 20), handleMulterError, (req, res) => {
+  console.log('📤 Multiple upload request received');
+  console.log('  Body:', req.body);
+  console.log('  Files:', req.files ? req.files.length : 0);
+  
   try {
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'No files uploaded' });
+      console.error('❌ No files in request');
+      return res.status(400).json({ 
+        success: false,
+        error: 'No files uploaded' 
+      });
     }
     
     const uploadedFiles = req.files.map(file => ({
@@ -92,14 +166,20 @@ router.post('/multiple', upload.array('files', 20), (req, res) => {
       size: file.size
     }));
     
+    console.log('✅ Files uploaded successfully:', uploadedFiles.length);
     res.json({
       success: true,
       message: `${uploadedFiles.length} files uploaded successfully`,
       files: uploadedFiles
     });
   } catch (error) {
-    console.error('Upload error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Upload error:', error);
+    console.error('  Stack:', error.stack);
+    res.status(500).json({ 
+      success: false,
+      error: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 

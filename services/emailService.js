@@ -3,11 +3,22 @@ const nodemailer = require('nodemailer');
 // Create transporter - configure with your email service
 // For Gmail, you'll need an App Password
 const createTransporter = () => {
+  const emailUser = process.env.EMAIL_USER || 'ahmed.sh.hammam@gmail.com';
+  const emailPass = process.env.EMAIL_PASSWORD || '';
+  
+  console.log('📧 Creating email transporter');
+  console.log('  Email user:', emailUser);
+  console.log('  Has password:', !!emailPass);
+  
+  if (!emailPass) {
+    console.warn('⚠️ EMAIL_PASSWORD not set! Emails will fail.');
+  }
+  
   return nodemailer.createTransport({
     service: 'gmail', // You can use 'gmail', 'outlook', 'yahoo', etc.
     auth: {
-      user: process.env.EMAIL_USER || 'ahmed.sh.hammam@gmail.com',
-      pass: process.env.EMAIL_PASSWORD || '', // Use App Password for Gmail
+      user: emailUser,
+      pass: emailPass,
     },
   });
 };

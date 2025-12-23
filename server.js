@@ -75,7 +75,35 @@ app.get('/api/health', (req, res) => {
     status: 'ok', 
     timestamp: new Date().toISOString(),
     allowedOrigins: allowedOrigins,
-    requestOrigin: req.headers.origin
+    requestOrigin: req.headers.origin,
+    env: {
+      hasEmailUser: !!process.env.EMAIL_USER,
+      hasEmailPassword: !!process.env.EMAIL_PASSWORD,
+      hasDatabaseUrl: !!process.env.DATABASE_URL,
+      hasFrontendUrl: !!process.env.FRONTEND_URL
+    }
+  });
+});
+
+// Test upload endpoint (without file)
+app.post('/api/upload/test', (req, res) => {
+  console.log('🧪 Upload test endpoint hit');
+  console.log('  Body:', req.body);
+  res.json({ 
+    success: true, 
+    message: 'Upload endpoint is accessible',
+    body: req.body
+  });
+});
+
+// Test inquiry endpoint
+app.post('/api/inquiries/test', (req, res) => {
+  console.log('🧪 Inquiry test endpoint hit');
+  console.log('  Body:', req.body);
+  res.json({ 
+    success: true, 
+    message: 'Inquiry endpoint is accessible',
+    body: req.body
   });
 });
 
