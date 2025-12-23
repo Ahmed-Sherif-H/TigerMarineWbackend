@@ -148,21 +148,21 @@ class ModelsService {
           },
           galleryImages: {
             create: galleryFiles.map((filename, index) => ({
-              filename: String(filename),
+              filename: this.extractFilename(String(filename)),
               order: index
-            }))
+            })).filter(img => img.filename) // Filter out null/empty filenames
           },
           videoFiles: {
             create: videoFiles.map((filename, index) => ({
-              filename: String(filename),
+              filename: this.extractFilename(String(filename)),
               order: index
-            }))
+            })).filter(vid => vid.filename) // Filter out null/empty filenames
           },
           interiorFiles: {
             create: interiorFiles.map((filename, index) => ({
-              filename: String(filename),
+              filename: this.extractFilename(String(filename)),
               order: index
-            }))
+            })).filter(int => int.filename) // Filter out null/empty filenames
           }
         },
         include: {
@@ -219,9 +219,10 @@ class ModelsService {
           ...(name && { name }),
           ...(description !== undefined && { description }),
           ...(shortDescription !== undefined && { shortDescription }),
-          ...(imageFile !== undefined && { imageFile }),
-          ...(heroImageFile !== undefined && { heroImageFile }),
-          ...(contentImageFile !== undefined && { contentImageFile }),
+          // Extract just filenames (strip any path prefixes) before saving
+          ...(imageFile !== undefined && { imageFile: this.extractFilename(imageFile) }),
+          ...(heroImageFile !== undefined && { heroImageFile: this.extractFilename(heroImageFile) }),
+          ...(contentImageFile !== undefined && { contentImageFile: this.extractFilename(contentImageFile) }),
           ...(section2Title !== undefined && { section2Title }),
           ...(section2Description !== undefined && { section2Description }),
           ...(specs && {
@@ -254,25 +255,25 @@ class ModelsService {
           ...(galleryFiles && {
             galleryImages: {
               create: galleryFiles.map((filename, index) => ({
-                filename: String(filename),
+                filename: this.extractFilename(String(filename)),
                 order: index
-              }))
+              })).filter(img => img.filename) // Filter out null/empty filenames
             }
           }),
           ...(videoFiles && {
             videoFiles: {
               create: videoFiles.map((filename, index) => ({
-                filename: String(filename),
+                filename: this.extractFilename(String(filename)),
                 order: index
-              }))
+              })).filter(vid => vid.filename) // Filter out null/empty filenames
             }
           }),
           ...(interiorFiles && {
             interiorFiles: {
               create: interiorFiles.map((filename, index) => ({
-                filename: String(filename),
+                filename: this.extractFilename(String(filename)),
                 order: index
-              }))
+              })).filter(int => int.filename) // Filter out null/empty filenames
             }
           })
         },
@@ -307,15 +308,32 @@ class ModelsService {
     }
   }
 
+  // Helper function to extract just the filename from a path
+  extractFilename(pathOrFilename) {
+    if (!pathOrFilename || pathOrFilename.trim() === '') {
+      return null;
+    }
+    // If it's already just a filename, return it
+    if (!pathOrFilename.includes('/')) {
+      return pathOrFilename.trim();
+    }
+    // If it's a path, extract just the filename
+    return pathOrFilename.split('/').pop().trim();
+  }
+
   // Helper function to build full image path
   buildImagePath(modelName, filename) {
     if (!filename || filename.trim() === '') {
       return null;
     }
+    // First, extract just the filename (in case a full path was passed)
+    const cleanFilename = this.extractFilename(filename);
+    if (!cleanFilename) return null;
+    
     // Get the correct folder name (maps abbreviated names to full folder names)
     const folderName = this.getModelFolderName(modelName);
     // Construct path: /images/{folderName}/{filename}
-    return `/images/${folderName}/${filename}`;
+    return `/images/${folderName}/${cleanFilename}`;
   }
 
   // Transform database model to frontend format
