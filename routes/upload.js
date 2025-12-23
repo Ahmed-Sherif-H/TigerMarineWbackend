@@ -8,13 +8,16 @@ const router = express.Router();
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    const { folder, modelName } = req.body;
+    const { folder, modelName, categoryName } = req.body;
     
     let uploadPath;
     if (folder === 'customizer') {
       // Customizer images: public/Customizer-images/[ModelName]/[PartName]/    
       const { partName } = req.body;
       uploadPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);                                                                    
+    } else if (folder === 'categories') {
+      // Category images: public/images/categories/[CategoryName]/
+      uploadPath = path.join(__dirname, '../public/images/categories', categoryName || 'default');
     } else {
       // Regular images: public/images/[ModelName]/
       const basePath = path.join(__dirname, '../public/images', modelName);
