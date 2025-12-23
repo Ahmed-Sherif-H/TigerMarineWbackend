@@ -29,20 +29,7 @@ router.post('/contact', async (req, res) => {
       });
     }
 
-    // Send email
-    let emailSent = false;
-    try {
-      console.log('📤 Attempting to send email...');
-      await sendContactEmail({ name, email, phone, subject, message });
-      emailSent = true;
-      console.log('✅ Email sent successfully');
-    } catch (emailError) {
-      console.error('❌ Email send failed:', emailError.message);
-      console.error('  Stack:', emailError.stack);
-      // Continue to save even if email fails
-    }
-
-    // Save to database
+    // Save to database first (faster response)
     console.log('💾 Saving to database...');
     const inquiry = await prisma.inquiry.create({
       data: {
@@ -56,10 +43,21 @@ router.post('/contact', async (req, res) => {
     });
     console.log('✅ Inquiry saved:', inquiry.id);
 
+    // Send email asynchronously (don't wait for it)
+    // This allows the API to respond quickly even if email is slow
+    sendContactEmail({ name, email, phone, subject, message })
+      .then(() => {
+        console.log('✅ Email sent successfully (async)');
+      })
+      .catch((emailError) => {
+        console.error('❌ Email send failed (async):', emailError.message);
+        // Email failure doesn't affect the response
+      });
+
+    // Respond immediately after saving to DB
     res.json({
       success: true,
       message: 'Contact form submitted successfully',
-      emailSent,
       data: { id: inquiry.id }
     });
   } catch (error) {
@@ -96,28 +94,7 @@ router.post('/customizer', async (req, res) => {
       });
     }
 
-    // Send email
-    let emailSent = false;
-    try {
-      console.log('📤 Attempting to send email...');
-      await sendCustomizerInquiry({
-        name,
-        email,
-        phone,
-        modelName,
-        selectedColors,
-        selectedFeatures,
-        message
-      });
-      emailSent = true;
-      console.log('✅ Email sent successfully');
-    } catch (emailError) {
-      console.error('❌ Email send failed:', emailError.message);
-      console.error('  Stack:', emailError.stack);
-      // Continue to save even if email fails
-    }
-
-    // Save to database
+    // Save to database first (faster response)
     console.log('💾 Saving to database...');
     const inquiry = await prisma.inquiry.create({
       data: {
@@ -133,10 +110,29 @@ router.post('/customizer', async (req, res) => {
     });
     console.log('✅ Inquiry saved:', inquiry.id);
 
+    // Send email asynchronously (don't wait for it)
+    // This allows the API to respond quickly even if email is slow
+    sendCustomizerInquiry({
+      name,
+      email,
+      phone,
+      modelName,
+      selectedColors,
+      selectedFeatures,
+      message
+    })
+      .then(() => {
+        console.log('✅ Email sent successfully (async)');
+      })
+      .catch((emailError) => {
+        console.error('❌ Email send failed (async):', emailError.message);
+        // Email failure doesn't affect the response
+      });
+
+    // Respond immediately after saving to DB
     res.json({
       success: true,
       message: 'Customizer inquiry submitted successfully',
-      emailSent,
       data: { id: inquiry.id }
     });
   } catch (error) {
