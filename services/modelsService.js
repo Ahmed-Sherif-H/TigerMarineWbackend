@@ -211,6 +211,24 @@ class ModelsService {
       await prisma.videoFile.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.interiorFile.deleteMany({ where: { modelId: parseInt(id) } });
 
+      // Log what we're receiving for debugging
+      console.log(`[ModelsService] Updating model ID: ${id}`);
+      console.log(`  Received imageFile: ${imageFile || 'undefined'}`);
+      console.log(`  Received heroImageFile: ${heroImageFile || 'undefined'}`);
+      console.log(`  Received contentImageFile: ${contentImageFile || 'undefined'}`);
+      console.log(`  Received galleryFiles count: ${galleryFiles?.length || 0}`);
+      console.log(`  Received interiorFiles count: ${interiorFiles?.length || 0}`);
+      console.log(`  Received videoFiles count: ${videoFiles?.length || 0}`);
+      
+      // Extract filenames before saving
+      const cleanImageFile = imageFile !== undefined ? this.extractFilename(imageFile) : undefined;
+      const cleanHeroImageFile = heroImageFile !== undefined ? this.extractFilename(heroImageFile) : undefined;
+      const cleanContentImageFile = contentImageFile !== undefined ? this.extractFilename(contentImageFile) : undefined;
+      
+      console.log(`  Cleaned imageFile: ${cleanImageFile || 'undefined'}`);
+      console.log(`  Cleaned heroImageFile: ${cleanHeroImageFile || 'undefined'}`);
+      console.log(`  Cleaned contentImageFile: ${cleanContentImageFile || 'undefined'}`);
+      
       // Update model and recreate related data
       const model = await prisma.model.update({
         where: { id: parseInt(id) },
@@ -219,10 +237,10 @@ class ModelsService {
           ...(name && { name }),
           ...(description !== undefined && { description }),
           ...(shortDescription !== undefined && { shortDescription }),
-          // Extract just filenames (strip any path prefixes) before saving
-          ...(imageFile !== undefined && { imageFile: this.extractFilename(imageFile) }),
-          ...(heroImageFile !== undefined && { heroImageFile: this.extractFilename(heroImageFile) }),
-          ...(contentImageFile !== undefined && { contentImageFile: this.extractFilename(contentImageFile) }),
+          // Save only filenames (not paths)
+          ...(cleanImageFile !== undefined && { imageFile: cleanImageFile }),
+          ...(cleanHeroImageFile !== undefined && { heroImageFile: cleanHeroImageFile }),
+          ...(cleanContentImageFile !== undefined && { contentImageFile: cleanContentImageFile }),
           ...(section2Title !== undefined && { section2Title }),
           ...(section2Description !== undefined && { section2Description }),
           ...(specs && {
@@ -288,8 +306,27 @@ class ModelsService {
         }
       });
 
-      return this.transformModel(model);
+      const updatedModel = await prisma.model.findUnique({
+        where: { id: parseInt(id) },
+        include: {
+          category: true,
+          specs: { orderBy: { key: 'asc' } },
+          features: { orderBy: { order: 'asc' } },
+          optionalFeatures: { orderBy: { order: 'asc' } },
+          galleryImages: { orderBy: { order: 'asc' } },
+          videoFiles: { orderBy: { order: 'asc' } },
+          interiorFiles: { orderBy: { order: 'asc' } }
+        }
+      });
+      
+      console.log(`[ModelsService] Model updated. Verifying saved data:`);
+      console.log(`  Saved imageFile: ${updatedModel.imageFile || 'null'}`);
+      console.log(`  Saved galleryImages count: ${updatedModel.galleryImages?.length || 0}`);
+      console.log(`  Saved interiorFiles count: ${updatedModel.interiorFiles?.length || 0}`);
+      
+      return this.transformModel(updatedModel);
     } catch (error) {
+      console.error(`[ModelsService] Error updating model:`, error);
       throw new Error(`Error updating model: ${error.message}`);
     }
   }
@@ -340,13 +377,23 @@ class ModelsService {
   transformModel(model) {
     const modelName = model.name;
     
-    return {
+    // Log what's in the database for debugging
+    console.log(`[ModelsService] Transforming model: ${modelName}`);
+    console.log(`  DB imageFile: ${model.imageFile || 'null'}`);
+    console.log(`  DB heroImageFile: ${model.heroImageFile || 'null'}`);
+    console.log(`  DB contentImageFile: ${model.contentImageFile || 'null'}`);
+    console.log(`  DB galleryImages count: ${model.galleryImages?.length || 0}`);
+    console.log(`  DB interiorFiles count: ${model.interiorFiles?.length || 0}`);
+    console.log(`  DB videoFiles count: ${model.videoFiles?.length || 0}`);
+    
+    const transformed = {
       id: model.id,
       name: model.name,
       categoryId: model.categoryId,
       categoryName: model.category?.name,
       description: model.description,
       shortDescription: model.shortDescription,
+      // Build paths from filenames stored in DB
       imageFile: this.buildImagePath(modelName, model.imageFile),
       heroImageFile: this.buildImagePath(modelName, model.heroImageFile),
       contentImageFile: this.buildImagePath(modelName, model.contentImageFile),
@@ -363,10 +410,30 @@ class ModelsService {
         category: opt.category,
         price: opt.price
       })) || [],
-      galleryFiles: model.galleryImages?.map(img => this.buildImagePath(modelName, img.filename)).filter(Boolean) || [],
-      videoFiles: model.videoFiles?.map(vid => this.buildImagePath(modelName, vid.filename)).filter(Boolean) || [],
-      interiorFiles: model.interiorFiles?.map(int => this.buildImagePath(modelName, int.filename)).filter(Boolean) || []
+      // Build paths from filenames stored in DB
+      galleryFiles: model.galleryImages?.map(img => {
+        const path = this.buildImagePath(modelName, img.filename);
+        console.log(`  Gallery: ${img.filename} -> ${path}`);
+        return path;
+      }).filter(Boolean) || [],
+      videoFiles: model.videoFiles?.map(vid => {
+        const path = this.buildImagePath(modelName, vid.filename);
+        console.log(`  Video: ${vid.filename} -> ${path}`);
+        return path;
+      }).filter(Boolean) || [],
+      interiorFiles: model.interiorFiles?.map(int => {
+        const path = this.buildImagePath(modelName, int.filename);
+        console.log(`  Interior: ${int.filename} -> ${path}`);
+        return path;
+      }).filter(Boolean) || []
     };
+    
+    console.log(`[ModelsService] Transformed model ${modelName}:`);
+    console.log(`  imageFile: ${transformed.imageFile}`);
+    console.log(`  galleryFiles count: ${transformed.galleryFiles.length}`);
+    console.log(`  interiorFiles count: ${transformed.interiorFiles.length}`);
+    
+    return transformed;
   }
 }
 
