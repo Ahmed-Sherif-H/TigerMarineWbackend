@@ -23,25 +23,25 @@ model Category {
 }
 
 model Model {
-  id                  Int      @id @default(autoincrement())
+  id                  Int               @id @default(autoincrement())
   categoryId          Int
-  category            Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category            Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   name                String
-  description         String?  @db.Text
+  description         String?           @db.Text
   shortDescription    String?
   imageFile           String?
   heroImageFile       String?
   contentImageFile    String?
   section2Title       String?
-  section2Description String?  @db.Text
+  section2Description String?           @db.Text
   specs               Spec[]
   features            Feature[]
   optionalFeatures    OptionalFeature[]
   galleryImages       GalleryImage[]
   videoFiles          VideoFile[]
   interiorFiles       InteriorFile[]
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 
   @@unique([categoryId, name])
   @@index([categoryId])
@@ -126,28 +126,27 @@ model InteriorFile {
 model Admin {
   id        Int      @id @default(autoincrement())
   email     String   @unique
-  password  String   // hashed password
+  password  String // hashed password
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Inquiry {
-  id              Int      @id @default(autoincrement())
-  type            String   // 'contact' or 'customizer'
-  name            String
-  email           String
-  phone           String?
-  subject         String?
-  message         String?  @db.Text
-  modelName       String?
-  selectedColors  String?  @db.Text // JSON string of selected colors
-  selectedFeatures String? @db.Text // JSON string of selected features
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  type             String // 'contact' or 'customizer'
+  name             String
+  email            String
+  phone            String?
+  subject          String?
+  message          String?  @db.Text
+  modelName        String?
+  selectedColors   String?  @db.Text // JSON string of selected colors
+  selectedFeatures String?  @db.Text // JSON string of selected features
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   @@index([email])
   @@index([type])
   @@index([createdAt])
 }
-

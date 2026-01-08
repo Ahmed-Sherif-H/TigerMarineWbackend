@@ -14,7 +14,8 @@
     "import:json": "node scripts/importFromJson.js",
     "migrate:categories": "node scripts/migrateDirect.js",
     "test:db": "node scripts/checkConnection.js",
-    "populate:images": "node scripts/populateImageFilenames.js"
+    "populate:images": "node scripts/populateImageFilenames.js",
+    "check:db": "node scripts/checkDatabase.js"
   },
   "keywords": [
     "tiger-marine",
