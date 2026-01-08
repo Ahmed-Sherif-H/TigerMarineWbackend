@@ -69,6 +69,7 @@ app.use('/api/models', require('./routes/models'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/inquiries', require('./routes/inquiries'));
+app.use('/api/events', require('./routes/events'));
 
 app.get('/api/health', (req, res) => {
   res.json({ 
