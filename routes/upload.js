@@ -74,11 +74,49 @@ const storage = multer.diskStorage({
         }
         uploadPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);
       } else if (folder === 'categories') {
-        // Category images: public/images/categories/[CategoryName]/
+        // Category images: public/images/categories/[CategoryType]/
+        // Category types: TopLine, MaxLine, ProLine, Open, SportLine
         if (!categoryName) {
           return cb(new Error('categoryName is required for category uploads'));
         }
-        uploadPath = path.join(__dirname, '../public/images/categories', categoryName);
+        
+        // Map category name to folder type
+        // Handles: "TopLine", "TopLine 650", "topline", "Top Line", etc.
+        const getCategoryType = (name) => {
+          const normalizedName = name.toLowerCase().trim();
+          
+          // Check for exact matches first
+          if (normalizedName === 'topline' || normalizedName.startsWith('topline')) {
+            return 'TopLine';
+          } else if (normalizedName === 'maxline' || normalizedName.startsWith('maxline')) {
+            return 'MaxLine';
+          } else if (normalizedName === 'proline' || normalizedName.startsWith('proline')) {
+            return 'ProLine';
+          } else if (normalizedName === 'open' || normalizedName.startsWith('open')) {
+            return 'Open';
+          } else if (normalizedName === 'sportline' || normalizedName.startsWith('sportline')) {
+            return 'SportLine';
+          }
+          
+          // Check for variations with spaces
+          if (normalizedName.includes('top line') || normalizedName.includes('topline')) {
+            return 'TopLine';
+          } else if (normalizedName.includes('max line') || normalizedName.includes('maxline')) {
+            return 'MaxLine';
+          } else if (normalizedName.includes('pro line') || normalizedName.includes('proline')) {
+            return 'ProLine';
+          } else if (normalizedName.includes('sport line') || normalizedName.includes('sportline')) {
+            return 'SportLine';
+          }
+          
+          // Default: use category name if no match (fallback)
+          console.warn(`⚠️  Unknown category type: ${name}, using as-is`);
+          return name;
+        };
+        
+        const categoryType = getCategoryType(categoryName);
+        uploadPath = path.join(__dirname, '../public/images/categories', categoryType);
+        console.log(`  Category: "${categoryName}" → Folder: "${categoryType}"`);
       } else if (folder === 'images') {
         // Regular images: public/images/[ModelName]/
         if (!modelName || modelName.trim() === '') {

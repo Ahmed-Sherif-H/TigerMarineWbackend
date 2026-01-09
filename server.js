@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs-extra');
 const { connectDB } = require('./config/database');
 
 const app = express();
@@ -117,12 +118,35 @@ app.get('/api/cors-test', (req, res) => {
   });
 });
 
+// Ensure required directories exist on startup
+const ensureDirectories = async () => {
+  const categoryTypes = ['TopLine', 'MaxLine', 'ProLine', 'Open', 'SportLine'];
+  const dirs = [
+    path.join(__dirname, 'public', 'Customizer-images'),
+    ...categoryTypes.map(type => path.join(__dirname, 'public', 'images', 'categories', type))
+  ];
+  
+  for (const dir of dirs) {
+    await fs.ensureDir(dir);
+    console.log(`✅ Ensured directory exists: ${dir}`);
+  }
+};
+
 // Start server
 (async () => {
   try {
+    // Ensure directories exist
+    await ensureDirectories();
+    
+    // Connect to database
     await connectDB();
+    
+    // Start server
     app.listen(PORT, () => {
       console.log(`🚀 Backend running on port ${PORT}`);
+      console.log(`📁 Static files served from: ${publicPath}`);
+      console.log(`⚠️  IMPORTANT: On Render, uploaded files are EPHEMERAL and will be lost on redeploy!`);
+      console.log(`   Consider using cloud storage (S3, Cloudinary, etc.) for production.`);
     });
   } catch (err) {
     console.error('❌ Server failed to start:', err);

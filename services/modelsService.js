@@ -359,7 +359,7 @@ class ModelsService {
   }
 
   // Helper function to build full image path
-  buildImagePath(modelName, filename) {
+  buildImagePath(modelName, filename, isInterior = false) {
     if (!filename || filename.trim() === '') {
       return null;
     }
@@ -369,6 +369,12 @@ class ModelsService {
     
     // Get the correct folder name (maps abbreviated names to full folder names)
     const folderName = this.getModelFolderName(modelName);
+    
+    // If it's an interior image, include the Interior subfolder
+    if (isInterior) {
+      return `/images/${folderName}/Interior/${cleanFilename}`;
+    }
+    
     // Construct path: /images/{folderName}/{filename}
     return `/images/${folderName}/${cleanFilename}`;
   }
@@ -422,16 +428,29 @@ class ModelsService {
         return path;
       }).filter(Boolean) || [],
       interiorFiles: model.interiorFiles?.map(int => {
-        const path = this.buildImagePath(modelName, int.filename);
+        const path = this.buildImagePath(modelName, int.filename, true); // true = isInterior
         console.log(`  Interior: ${int.filename} -> ${path}`);
         return path;
       }).filter(Boolean) || []
     };
     
+    // Add main interior image (first one) and interior gallery (rest)
+    // Main interior image for single display
+    transformed.interiorMainImage = transformed.interiorFiles.length > 0 
+      ? transformed.interiorFiles[0] 
+      : null;
+    
+    // Interior gallery carousel (all except first, or all if only one)
+    transformed.interiorGallery = transformed.interiorFiles.length > 1
+      ? transformed.interiorFiles.slice(1)
+      : transformed.interiorFiles;
+    
     console.log(`[ModelsService] Transformed model ${modelName}:`);
     console.log(`  imageFile: ${transformed.imageFile}`);
     console.log(`  galleryFiles count: ${transformed.galleryFiles.length}`);
     console.log(`  interiorFiles count: ${transformed.interiorFiles.length}`);
+    console.log(`  interiorMainImage: ${transformed.interiorMainImage || 'null'}`);
+    console.log(`  interiorGallery count: ${transformed.interiorGallery.length}`);
     
     return transformed;
   }
