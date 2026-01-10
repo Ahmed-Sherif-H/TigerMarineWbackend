@@ -77,7 +77,8 @@ Backend/
 │   ├── seed.js           # Seed admin user
 │   ├── seedAll.js        # Seed admin + import data
 │   ├── importFromJson.js # Import models from JSON
-│   └── ...
+│   ├── checkConnection.js # Test database connection
+│   └── checkDatabase.js   # Check database status
 ├── prisma/         # Database schema and migrations
 │   ├── schema.prisma
 │   └── migrations/
@@ -144,8 +145,8 @@ Backend/
 - [Setup Guide](./SETUP.md) - Detailed setup instructions
 - [Email Setup](./EMAIL_SETUP.md) - Email configuration
 - [Testing](./TESTING.md) - Testing guide
+- [Railway Deployment](./docs/RAILWAY_DEPLOYMENT.md) - Deployment guide for Railway
 - [Troubleshooting](./docs/TROUBLESHOOTING.md) - Common issues and solutions
-- [Render Storage Issue](./RENDER_STORAGE_ISSUE.md) - Image upload persistence on Render
 
 ## 🔒 Security Notes
 
@@ -155,12 +156,6 @@ Backend/
 - Never commit `.env` file to git
 
 ## 🚨 Important Notes
-
-### Render Deployment
-- **Image Uploads**: Files uploaded to local filesystem are **ephemeral** on Render
-- Images will be lost on service restart/redeploy
-- For production, use cloud storage (S3, Cloudinary, etc.)
-- See [RENDER_STORAGE_ISSUE.md](./RENDER_STORAGE_ISSUE.md) for details
 
 ### Database
 - Always run migrations before deploying
