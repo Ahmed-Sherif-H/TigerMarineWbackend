@@ -9,4 +9,5 @@ build/
 .env.production.backup
 .env.local
 .env.production
+.env.railway
 
