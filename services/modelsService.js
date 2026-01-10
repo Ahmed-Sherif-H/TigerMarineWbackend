@@ -16,8 +16,7 @@ class ModelsService {
       'OP850': 'Open850',
       'OP750': 'Open750',
       'OP650': 'Open650',
-      'Infinity 280': 'Infinity 280',
-      'Striker 330': 'Striker 330'
+      'Infinity 280': 'Infinity 280'
     };
     
     // Return mapped name if exists, otherwise return original name
@@ -200,16 +199,138 @@ class ModelsService {
         optionalFeatures,
         galleryFiles,
         videoFiles,
-        interiorFiles
+        interiorFiles,
+        interiorMainImage // Support for single interior image update
       } = modelData;
 
-      // First, delete all related data
+      // Log immediately after extraction to debug
+      console.log(`[ModelsService] ===== UPDATE MODEL DEBUG =====`);
+      console.log(`[ModelsService] Raw modelData keys:`, Object.keys(modelData));
+      console.log(`[ModelsService] interiorMainImage in modelData:`, modelData.interiorMainImage);
+      console.log(`[ModelsService] interiorMainImage extracted:`, interiorMainImage);
+      console.log(`[ModelsService] interiorMainImage type:`, typeof interiorMainImage);
+      console.log(`[ModelsService] ===============================`);
+
+      // Get existing model to preserve data if not being updated
+      const existingModel = await prisma.model.findUnique({
+        where: { id: parseInt(id) },
+        include: {
+          interiorFiles: { orderBy: { order: 'asc' } }
+        }
+      });
+
+      // First, delete all related data (will recreate if provided)
       await prisma.spec.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.feature.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.optionalFeature.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.galleryImage.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.videoFile.deleteMany({ where: { modelId: parseInt(id) } });
-      await prisma.interiorFile.deleteMany({ where: { modelId: parseInt(id) } });
+      
+      // Handle interior files: preserve existing if not being updated
+      let finalInteriorFiles = interiorFiles;
+      let shouldUpdateInteriorFiles = false;
+      
+      // If interiorMainImage is provided (and not empty), it should be the first item
+      const hasValidMainImage = interiorMainImage !== undefined && interiorMainImage !== null && interiorMainImage !== '';
+      
+      // If interiorFiles array is explicitly provided
+      if (interiorFiles !== undefined) {
+        console.log(`[ModelsService] interiorFiles is defined, checking interiorMainImage...`);
+        console.log(`  interiorMainImage value: "${interiorMainImage}"`);
+        console.log(`  interiorMainImage type: ${typeof interiorMainImage}`);
+        console.log(`  hasValidMainImage: ${hasValidMainImage}`);
+        
+        if (hasValidMainImage) {
+          // If both are provided, use interiorMainImage as first, then interiorFiles as gallery
+          const mainImageFilename = this.extractFilename(interiorMainImage);
+          console.log(`[ModelsService] Extracted main image filename: "${mainImageFilename}"`);
+          
+          if (mainImageFilename) {
+            // Extract filenames from interiorFiles (they might be paths or filenames)
+            const galleryFilenames = interiorFiles.map(f => this.extractFilename(String(f))).filter(Boolean);
+            console.log(`[ModelsService] Gallery filenames extracted: [${galleryFilenames.join(', ')}]`);
+            
+            finalInteriorFiles = [
+              mainImageFilename, // Main image first
+              ...galleryFilenames // Gallery rest
+            ];
+            console.log(`[ModelsService] ✅ Both interiorMainImage and interiorFiles provided`);
+            console.log(`  Main image: ${mainImageFilename}`);
+            console.log(`  Gallery count: ${galleryFilenames.length} images`);
+            console.log(`  Final array: [${finalInteriorFiles.join(', ')}]`);
+          } else {
+            // Couldn't extract filename, just use interiorFiles
+            finalInteriorFiles = interiorFiles.map(f => this.extractFilename(String(f))).filter(Boolean);
+            console.warn(`[ModelsService] ⚠️ interiorFiles provided, but interiorMainImage filename extraction failed`);
+            console.warn(`  Using only interiorFiles: [${finalInteriorFiles.join(', ')}]`);
+          }
+        } else {
+          // Only interiorFiles provided (no valid main image)
+          finalInteriorFiles = interiorFiles.map(f => this.extractFilename(String(f))).filter(Boolean);
+          console.log(`[ModelsService] Only interiorFiles provided: ${interiorFiles.length} items`);
+          console.log(`  Extracted filenames: [${finalInteriorFiles.join(', ')}]`);
+        }
+        shouldUpdateInteriorFiles = true;
+      }
+      // If only interiorMainImage is provided (and not empty) but interiorFiles is not, update just the first one
+      else if (hasValidMainImage) {
+        const mainImageFilename = this.extractFilename(interiorMainImage);
+        console.log(`[ModelsService] Processing interiorMainImage: "${interiorMainImage}" -> filename: "${mainImageFilename}"`);
+        
+        if (mainImageFilename && existingModel) {
+          // Keep existing interior files, but replace the first one
+          const existingInterior = existingModel.interiorFiles || [];
+          if (existingInterior.length > 0) {
+            // Replace first, keep rest
+            finalInteriorFiles = [
+              mainImageFilename, // New main image as first
+              ...existingInterior.slice(1).map(f => f.filename) // Keep rest
+            ];
+            console.log(`[ModelsService] Updating only interiorMainImage: ${mainImageFilename}`);
+            console.log(`  Preserving ${existingInterior.length - 1} existing interior files`);
+            console.log(`  Final array: [${finalInteriorFiles.join(', ')}]`);
+          } else {
+            // No existing files, create new array with just the main image
+            finalInteriorFiles = [mainImageFilename];
+            console.log(`[ModelsService] Creating new interiorMainImage (no existing files): ${mainImageFilename}`);
+          }
+          shouldUpdateInteriorFiles = true;
+        } else if (mainImageFilename) {
+          // No existing model or files, create new array with just the main image
+          finalInteriorFiles = [mainImageFilename];
+          shouldUpdateInteriorFiles = true;
+          console.log(`[ModelsService] Creating new interiorMainImage (no existing model): ${mainImageFilename}`);
+        } else {
+          console.warn(`[ModelsService] Could not extract filename from interiorMainImage: "${interiorMainImage}"`);
+        }
+      }
+      // If interiorMainImage is empty string, it means clear it (set first to empty, but keep gallery)
+      else if (interiorMainImage === '') {
+        console.log(`[ModelsService] interiorMainImage is empty string - clearing main image but keeping gallery`);
+        if (existingModel) {
+          const existingInterior = existingModel.interiorFiles || [];
+          if (existingInterior.length > 1) {
+            // Remove first, keep rest
+            finalInteriorFiles = existingInterior.slice(1).map(f => f.filename);
+            shouldUpdateInteriorFiles = true;
+            console.log(`  Keeping ${finalInteriorFiles.length} gallery images`);
+          } else if (existingInterior.length === 1) {
+            // Only one image, remove it
+            finalInteriorFiles = [];
+            shouldUpdateInteriorFiles = true;
+            console.log(`  Removing only interior image`);
+          }
+        }
+      }
+      // If neither is provided, preserve existing files (don't update)
+      else {
+        console.log(`[ModelsService] No interior files update - preserving existing ${existingModel?.interiorFiles?.length || 0} files`);
+      }
+      
+      // Only delete and recreate interior files if we're updating them
+      if (shouldUpdateInteriorFiles && finalInteriorFiles !== undefined) {
+        await prisma.interiorFile.deleteMany({ where: { modelId: parseInt(id) } });
+      }
 
       // Log what we're receiving for debugging
       console.log(`[ModelsService] Updating model ID: ${id}`);
@@ -218,6 +339,10 @@ class ModelsService {
       console.log(`  Received contentImageFile: ${contentImageFile || 'undefined'}`);
       console.log(`  Received galleryFiles count: ${galleryFiles?.length || 0}`);
       console.log(`  Received interiorFiles count: ${interiorFiles?.length || 0}`);
+      console.log(`  Received interiorMainImage: "${interiorMainImage || 'undefined'}"`);
+      console.log(`  interiorMainImage type: ${typeof interiorMainImage}, empty: ${interiorMainImage === ''}`);
+      console.log(`  Final interiorFiles count: ${finalInteriorFiles?.length || 0}`);
+      console.log(`  Should update interior files: ${shouldUpdateInteriorFiles}`);
       console.log(`  Received videoFiles count: ${videoFiles?.length || 0}`);
       
       // Extract filenames before saving
@@ -286,9 +411,9 @@ class ModelsService {
               })).filter(vid => vid.filename) // Filter out null/empty filenames
             }
           }),
-          ...(interiorFiles && {
+          ...(shouldUpdateInteriorFiles && finalInteriorFiles !== undefined && finalInteriorFiles.length > 0 && {
             interiorFiles: {
-              create: interiorFiles.map((filename, index) => ({
+              create: finalInteriorFiles.map((filename, index) => ({
                 filename: this.extractFilename(String(filename)),
                 order: index
               })).filter(int => int.filename) // Filter out null/empty filenames

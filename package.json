@@ -15,7 +15,8 @@
     "migrate:categories": "node scripts/migrateDirect.js",
     "test:db": "node scripts/checkConnection.js",
     "populate:images": "node scripts/populateImageFilenames.js",
-    "check:db": "node scripts/checkDatabase.js"
+    "check:db": "node scripts/checkDatabase.js",
+    "remove:striker": "node scripts/removeStrikerData.js"
   },
   "keywords": [
     "tiger-marine",
