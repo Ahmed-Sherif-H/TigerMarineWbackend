@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { prisma } = require('../config/database');
 const { sendContactEmail, sendCustomizerInquiry } = require('../services/emailService');
+const { authenticate } = require('../middleware/auth');
 
 // Submit contact form
 router.post('/contact', async (req, res) => {
