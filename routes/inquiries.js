@@ -146,8 +146,8 @@ router.post('/customizer', async (req, res) => {
   }
 });
 
-// Get all inquiries (for admin)
-router.get('/', async (req, res) => {
+// Get all inquiries (admin only)
+router.get('/', authenticate, async (req, res) => {
   try {
     const { type, limit = 50, offset = 0 } = req.query;
     

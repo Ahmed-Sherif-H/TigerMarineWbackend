@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs-extra');
+const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -175,8 +176,8 @@ const upload = multer({
   }
 });
 
-// Upload single file
-router.post('/single', (req, res, next) => {
+// Upload single file (admin only)
+router.post('/single', authenticate, (req, res, next) => {
   // Log incoming request
   console.log('📤 Upload request received');
   console.log('  Content-Type:', req.headers['content-type']);
@@ -250,8 +251,8 @@ router.post('/single', (req, res, next) => {
   }
 });
 
-// Upload multiple files
-router.post('/multiple', (req, res, next) => {
+// Upload multiple files (admin only)
+router.post('/multiple', authenticate, (req, res, next) => {
   upload.array('files', 20)(req, res, (err) => {
     if (err) {
       return handleMulterError(err, req, res, next);
@@ -295,8 +296,8 @@ router.post('/multiple', (req, res, next) => {
   }
 });
 
-// Get list of files in a folder
-router.get('/list', (req, res) => {
+// Get list of files in a folder (admin only)
+router.get('/list', authenticate, (req, res) => {
   try {
     const { folder, modelName, partName } = req.query;
     
@@ -330,8 +331,8 @@ router.get('/list', (req, res) => {
   }
 });
 
-// Delete a file
-router.delete('/delete', (req, res) => {
+// Delete a file (admin only)
+router.delete('/delete', authenticate, (req, res) => {
   try {
     const { filePath } = req.body;
     

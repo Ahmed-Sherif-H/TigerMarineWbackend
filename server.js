@@ -69,6 +69,7 @@ app.use('/images', express.static(path.join(publicPath, 'images')));
 app.use('/Customizer-images', express.static(path.join(publicPath, 'Customizer-images')));
 
 // Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/models', require('./routes/models'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/upload', require('./routes/upload'));
@@ -83,6 +84,11 @@ app.get('/api', (req, res) => {
     status: 'ok',
     baseUrl: `${req.protocol}://${req.get('host')}/api`,
     endpoints: {
+      auth: {
+        login: 'POST /api/auth/login - Login with email and password',
+        verify: 'GET /api/auth/verify - Verify authentication token',
+        logout: 'POST /api/auth/logout - Logout (client-side token removal)'
+      },
       health: 'GET /api/health - Health check',
       models: {
         list: 'GET /api/models - Get all models',

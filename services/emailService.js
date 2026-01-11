@@ -5,13 +5,19 @@ const nodemailer = require('nodemailer');
 const createTransporter = () => {
   const emailUser = process.env.EMAIL_USER || 'ahmed.sh.hammam@gmail.com';
   const emailPass = process.env.EMAIL_PASSWORD || '';
+  const isDev = process.env.NODE_ENV !== 'production';
   
-  console.log('📧 Creating email transporter');
-  console.log('  Email user:', emailUser);
-  console.log('  Has password:', !!emailPass);
+  if (isDev) {
+    console.log('📧 Creating email transporter');
+    console.log('  Email user:', emailUser);
+    console.log('  Has password:', !!emailPass);
+  }
   
   if (!emailPass) {
-    console.warn('⚠️ EMAIL_PASSWORD not set! Emails will fail.');
+    console.error('❌ EMAIL_PASSWORD not set! Emails will fail.');
+    console.error('   Please set EMAIL_PASSWORD in your .env file or Railway variables.');
+    console.error('   For Gmail: Use an App Password (not your regular password)');
+    throw new Error('EMAIL_PASSWORD environment variable is not set');
   }
   
   return nodemailer.createTransport({

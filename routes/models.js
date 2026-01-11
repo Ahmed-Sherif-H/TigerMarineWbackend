@@ -1,21 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const modelsController = require('../controllers/modelsController');
+const { authenticate } = require('../middleware/auth');
 
-// Get all models
+// Get all models (public)
 router.get('/', (req, res) => modelsController.getAllModels(req, res));
 
-// Get single model by ID
+// Get single model by ID (public)
 router.get('/:id', (req, res) => modelsController.getModelById(req, res));
 
-// Create new model
-router.post('/', (req, res) => modelsController.createModel(req, res));
+// Create new model (admin only)
+router.post('/', authenticate, (req, res) => modelsController.createModel(req, res));
 
-// Update model
-router.put('/:id', (req, res) => modelsController.updateModel(req, res));
+// Update model (admin only)
+router.put('/:id', authenticate, (req, res) => modelsController.updateModel(req, res));
 
-// Delete model
-router.delete('/:id', (req, res) => modelsController.deleteModel(req, res));
+// Delete model (admin only)
+router.delete('/:id', authenticate, (req, res) => modelsController.deleteModel(req, res));
 
 module.exports = router;
 
