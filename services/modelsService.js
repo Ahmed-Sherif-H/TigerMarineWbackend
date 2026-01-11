@@ -370,31 +370,76 @@ class ModelsService {
     }
   }
 
-  // Helper function to check if a string is a YouTube URL
+  // Helper function to check if a string is a YouTube URL or video ID
   isYouTubeUrl(urlOrId) {
     if (!urlOrId || typeof urlOrId !== 'string') return false;
     const trimmed = urlOrId.trim();
+    
     // Check if it's a YouTube URL pattern
     const youtubePatterns = [
       /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
       /youtube\.com\/.*[?&]v=([a-zA-Z0-9_-]{11})/,
     ];
-    // Check if it's just a video ID (11 characters, alphanumeric with dashes/underscores)
-    if (/^[a-zA-Z0-9_-]{11}$/.test(trimmed)) return true;
+    
     // Check if it matches YouTube URL patterns
-    return youtubePatterns.some(pattern => pattern.test(trimmed));
+    if (youtubePatterns.some(pattern => pattern.test(trimmed))) return true;
+    
+    // Check if it's just a video ID (11 characters, alphanumeric with dashes/underscores)
+    // Also handle YouTube share links like "VIDEO_ID?si=..." or "VIDEO_ID&si=..."
+    const videoIdMatch = trimmed.match(/^([a-zA-Z0-9_-]{11})([?&].*)?$/);
+    if (videoIdMatch) return true;
+    
+    return false;
   }
 
-  // Helper function to extract just the filename from a path (preserves YouTube URLs)
+  // Extract YouTube video ID from URL or ID string
+  extractYouTubeVideoId(urlOrId) {
+    if (!urlOrId || typeof urlOrId !== 'string') return null;
+    const trimmed = urlOrId.trim();
+    
+    // Try to extract from YouTube URL patterns
+    const urlPatterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+      /youtube\.com\/.*[?&]v=([a-zA-Z0-9_-]{11})/,
+    ];
+    
+    for (const pattern of urlPatterns) {
+      const match = trimmed.match(pattern);
+      if (match && match[1]) return match[1];
+    }
+    
+    // If it's just a video ID (with optional share parameters)
+    const videoIdMatch = trimmed.match(/^([a-zA-Z0-9_-]{11})([?&].*)?$/);
+    if (videoIdMatch) return videoIdMatch[1];
+    
+    return null;
+  }
+
+  // Convert YouTube video ID or URL to embed URL
+  getYouTubeEmbedUrl(urlOrId) {
+    const videoId = this.extractYouTubeVideoId(urlOrId);
+    if (!videoId) return null;
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  // Convert YouTube video ID or URL to watch URL
+  getYouTubeWatchUrl(urlOrId) {
+    const videoId = this.extractYouTubeVideoId(urlOrId);
+    if (!videoId) return null;
+    return `https://www.youtube.com/watch?v=${videoId}`;
+  }
+
+  // Helper function to extract just the filename from a path (extracts YouTube video ID)
   extractFilename(pathOrFilename) {
     if (!pathOrFilename || pathOrFilename.trim() === '') {
       return null;
     }
     const trimmed = pathOrFilename.trim();
     
-    // If it's a YouTube URL, preserve it as-is
+    // If it's a YouTube URL or video ID, extract just the video ID for storage
     if (this.isYouTubeUrl(trimmed)) {
-      return trimmed;
+      const videoId = this.extractYouTubeVideoId(trimmed);
+      return videoId || trimmed; // Return extracted video ID, or original if extraction fails
     }
     
     // If it's already just a filename, return it
@@ -466,10 +511,11 @@ class ModelsService {
         return path;
       }).filter(Boolean) || [],
       videoFiles: model.videoFiles?.map(vid => {
-        // If it's a YouTube URL, return it as-is
+        // If it's a YouTube URL or video ID, convert to embed URL
         if (this.isYouTubeUrl(vid.filename)) {
-          console.log(`  Video (YouTube): ${vid.filename} -> preserved as-is`);
-          return vid.filename;
+          const embedUrl = this.getYouTubeEmbedUrl(vid.filename);
+          console.log(`  Video (YouTube): ${vid.filename} -> ${embedUrl}`);
+          return embedUrl || vid.filename; // Fallback to original if extraction fails
         }
         // Otherwise, build the image path for local videos
         const path = this.buildImagePath(modelName, vid.filename);
