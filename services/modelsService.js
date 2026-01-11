@@ -511,11 +511,10 @@ class ModelsService {
         return path;
       }).filter(Boolean) || [],
       videoFiles: model.videoFiles?.map(vid => {
-        // If it's a YouTube URL or video ID, convert to embed URL
+        // If it's a YouTube URL or video ID, return it as-is (frontend will handle embed conversion)
         if (this.isYouTubeUrl(vid.filename)) {
-          const embedUrl = this.getYouTubeEmbedUrl(vid.filename);
-          console.log(`  Video (YouTube): ${vid.filename} -> ${embedUrl}`);
-          return embedUrl || vid.filename; // Fallback to original if extraction fails
+          console.log(`  Video (YouTube): ${vid.filename} -> preserved as-is`);
+          return vid.filename; // Return original URL/ID, let frontend convert to embed
         }
         // Otherwise, build the image path for local videos
         const path = this.buildImagePath(modelName, vid.filename);
