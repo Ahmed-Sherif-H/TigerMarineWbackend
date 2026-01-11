@@ -72,6 +72,52 @@ app.use('/api/upload', require('./routes/upload'));
 app.use('/api/inquiries', require('./routes/inquiries'));
 app.use('/api/events', require('./routes/events'));
 
+// API root endpoint - list available endpoints
+app.get('/api', (req, res) => {
+  res.json({
+    name: 'Tiger Marine Backend API',
+    version: '1.0.0',
+    status: 'ok',
+    baseUrl: `${req.protocol}://${req.get('host')}/api`,
+    endpoints: {
+      health: 'GET /api/health - Health check',
+      models: {
+        list: 'GET /api/models - Get all models',
+        get: 'GET /api/models/:id - Get single model',
+        create: 'POST /api/models - Create new model (admin)',
+        update: 'PUT /api/models/:id - Update model (admin)',
+        delete: 'DELETE /api/models/:id - Delete model (admin)'
+      },
+      categories: {
+        list: 'GET /api/categories - Get all categories',
+        get: 'GET /api/categories/:id - Get single category',
+        create: 'POST /api/categories - Create category (admin)',
+        update: 'PUT /api/categories/:id - Update category (admin)',
+        delete: 'DELETE /api/categories/:id - Delete category (admin)'
+      },
+      events: {
+        list: 'GET /api/events - Get all events',
+        get: 'GET /api/events/:id - Get single event',
+        create: 'POST /api/events - Create event (admin)',
+        update: 'PUT /api/events/:id - Update event (admin)',
+        delete: 'DELETE /api/events/:id - Delete event (admin)'
+      },
+      inquiries: {
+        contact: 'POST /api/inquiries/contact - Submit contact form',
+        customizer: 'POST /api/inquiries/customizer - Submit customizer inquiry',
+        list: 'GET /api/inquiries - Get all inquiries (admin)'
+      },
+      upload: {
+        single: 'POST /api/upload/single - Upload single file',
+        multiple: 'POST /api/upload/multiple - Upload multiple files',
+        list: 'GET /api/upload/list - List files in folder',
+        delete: 'DELETE /api/upload/delete - Delete file'
+      }
+    },
+    documentation: 'See API_ENDPOINTS.md for detailed documentation'
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
@@ -135,6 +181,18 @@ const ensureDirectories = async () => {
 // Start server
 (async () => {
   try {
+    // Debug: Check environment variables
+    console.log('🔍 Environment variables check:');
+    console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+    console.log('DATABASE_URL length:', process.env.DATABASE_URL?.length || 0);
+    console.log('All DB-related vars:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('DB')));
+    
+    if (!process.env.DATABASE_URL) {
+      console.error('❌ DATABASE_URL is not set!');
+      console.error('Please set DATABASE_URL in Railway Web Service variables');
+      process.exit(1);
+    }
+    
     // Ensure directories exist
     await ensureDirectories();
     

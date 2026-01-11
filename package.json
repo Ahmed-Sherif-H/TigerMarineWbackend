@@ -13,6 +13,11 @@
     "prisma:seed": "node scripts/seed.js",
     "seed:all": "node scripts/seedAll.js",
     "import:json": "node scripts/importFromJson.js",
+    "export:db": "node scripts/exportDatabase.js",
+    "import:exported": "node scripts/importExportedData.js",
+    "remove:videos": "node scripts/removeAllVideos.js",
+    "remove:striker": "node scripts/removeStrikerData.js",
+    "add:interior-column": "node scripts/addInteriorMainImageColumn.js",
     "test:db": "node scripts/checkConnection.js",
     "check:db": "node scripts/checkDatabase.js"
   },

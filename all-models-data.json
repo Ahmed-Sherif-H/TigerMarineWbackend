@@ -883,40 +883,5 @@
     "optionalFeatures": [],
     "categoryName": "Infinity",
     "categoryId": 6
-  },
-  {
-    "name": "Striker 330",
-    "description": "Striker 330 model - performance rigid boat",
-    "shortDescription": "Striker 330",
-    "imageFile": "",
-    "heroImageFile": "",
-    "contentImageFile": "",
-    "galleryFiles": [],
-    "videoFiles": [],
-    "interiorFiles": [],
-    "section2Title": "",
-    "section2Description": "",
-    "specs": {
-      "length": "10.0 m",
-      "beam": "3.3 m",
-      "draft": "1.1 m",
-      "engine": "Outboard 400HP",
-      "fuelCapacity": "300L",
-      "waterCapacity": "70L",
-      "maxSpeed": "55 knots",
-      "cruisingSpeed": "40 knots",
-      "capacity": "10 passengers"
-    },
-    "standardFeatures": [
-      "Performance hull design",
-      "Premium materials",
-      "Advanced navigation",
-      "Comfortable seating",
-      "Safety equipment",
-      "Storage compartments"
-    ],
-    "optionalFeatures": [],
-    "categoryName": "Striker",
-    "categoryId": 7
   }
 ]

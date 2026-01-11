@@ -88,12 +88,7 @@ async function importFromJson(jsonFilePath) {
                 order: index
               }))
             },
-            videoFiles: {
-              create: (modelData.videoFiles || []).map((filename, index) => ({
-                filename: String(filename),
-                order: index
-              }))
-            },
+            // videoFiles excluded - videos will be added via YouTube links
             interiorFiles: {
               create: (modelData.interiorFiles || []).map((filename, index) => ({
                 filename: String(filename),

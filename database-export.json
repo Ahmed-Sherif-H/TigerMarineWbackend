@@ -1,0 +1,4707 @@
+[
+  {
+    "id": 1,
+    "name": "MaxLine",
+    "description": "Our signature series, crafted to embody the highest standards of luxury, performance, and refinement.",
+    "image": "DJI_0290.jpg",
+    "heroImage": "MaxLine.jpg",
+    "mainGroup": "inflatableBoats",
+    "order": 1,
+    "models": [
+      {
+        "id": 1,
+        "name": "ML38",
+        "description": "The ultimate expression of luxury and power in inflatable boating.",
+        "shortDescription": "Flagship inflatable with uncompromising luxury.",
+        "imageFile": "DJI_0058.jpg",
+        "heroImageFile": "DJI_0058.jpg",
+        "contentImageFile": "DJI_0061.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "The flagship of Tiger Marine — a true statement of luxury and performance. The ML38 combines spacious deck design, premium materials, and twin-engine power to deliver an unmatched cruising experience.",
+        "categoryName": "MaxLine",
+        "specs": [
+          {
+            "key": "Beam",
+            "value": "3.70 m"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "2X330 Liter"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "130 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "450 Liter"
+          },
+          {
+            "key": "Length",
+            "value": "11.65 m"
+          },
+          {
+            "key": "MaxHP",
+            "value": "2X400 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "2X300 HP"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "16"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "20"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "2X350 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "2"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "8"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "65 cm"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Premium inflatable construction",
+            "order": 0
+          },
+          {
+            "feature": "Advanced hull design",
+            "order": 1
+          },
+          {
+            "feature": "Luxury amenities",
+            "order": 2
+          },
+          {
+            "feature": "Navigation electronics",
+            "order": 3
+          },
+          {
+            "feature": "Safety equipment",
+            "order": 4
+          },
+          {
+            "feature": "Storage compartments",
+            "order": 5
+          },
+          {
+            "feature": "External and internal LED lighting",
+            "order": 6
+          },
+          {
+            "feature": "1670 Dtex heavy hypalon tube",
+            "order": 7
+          },
+          {
+            "feature": "Aft storage hatch with manual actuators",
+            "order": 8
+          },
+          {
+            "feature": "Cabin portlight windows",
+            "order": 9
+          },
+          {
+            "feature": "Manual aft table",
+            "order": 10
+          },
+          {
+            "feature": "Toilet + 48 Liter Black water system",
+            "order": 11
+          },
+          {
+            "feature": "White hull and deck",
+            "order": 12
+          },
+          {
+            "feature": "Stern and bow cleats",
+            "order": 13
+          },
+          {
+            "feature": "Main battery switch",
+            "order": 14
+          },
+          {
+            "feature": "Complete cushions with bow and aft sundeck",
+            "order": 15
+          },
+          {
+            "feature": "Stainless steel bow handrail",
+            "order": 16
+          },
+          {
+            "feature": "12V Electrical System",
+            "order": 17
+          },
+          {
+            "feature": "Navigation lights",
+            "order": 18
+          },
+          {
+            "feature": "Pilot and Co-pilot molded seats",
+            "order": 19
+          },
+          {
+            "feature": "Sliding cabin access door",
+            "order": 20
+          },
+          {
+            "feature": "Wetbar / Driver seat / cabinet with sink",
+            "order": 21
+          },
+          {
+            "feature": "Bilge pumps",
+            "order": 22
+          },
+          {
+            "feature": "Swimming platforms",
+            "order": 23
+          },
+          {
+            "feature": "Gray water pump",
+            "order": 24
+          },
+          {
+            "feature": "Swimming platform shower",
+            "order": 25
+          },
+          {
+            "feature": "Telescopic ladder",
+            "order": 26
+          },
+          {
+            "feature": "2X330 Liters fuel tanks with select switch",
+            "order": 27
+          },
+          {
+            "feature": "130 Liter water tank",
+            "order": 28
+          },
+          {
+            "feature": "Cabin interior",
+            "order": 29
+          },
+          {
+            "feature": "Wardrobe and cabinet",
+            "order": 30
+          },
+          {
+            "feature": "Porthole - Manhole skylight",
+            "order": 31
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Air conditioning",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Bow thruster",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Windlass with anchor and chain",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Underwater lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Battery charger",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Hot water system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Shore power with 220V system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Fiberglass T-top with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Fiberglass Rollbar + Sunshade Awnings",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Electric stove",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Electric grill",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Foam teak floors",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Flexi-teak floor",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Real teak floor",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Diesel Generator 3.5 KW",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Electric Table Kit",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          },
+          {
+            "name": "Music system with 4 speakers",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 16
+          },
+          {
+            "name": "T-top extension",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 17
+          },
+          {
+            "name": "Hull and Deck Gelcoat Coloring",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 18
+          },
+          {
+            "name": "Tube carbon texture",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 19
+          },
+          {
+            "name": "65 Liter electric fridge",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 20
+          },
+          {
+            "name": "36 Liter - in cabin drawer fridge",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 21
+          },
+          {
+            "name": "Silvertex cushions",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 22
+          },
+          {
+            "name": "Ice-maker",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 23
+          },
+          {
+            "name": "Microwave - in cabin",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 24
+          },
+          {
+            "name": "Trim tabs",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 25
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "DJI_0175.jpg",
+            "order": 0
+          },
+          {
+            "filename": "DJI_0210.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0217.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0223.jpg",
+            "order": 3
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "GOPR1085 (2).jpg",
+            "order": 0
+          },
+          {
+            "filename": "GOPR1085 (2).jpg",
+            "order": 1
+          },
+          {
+            "filename": "GOPR1085 (2).jpg",
+            "order": 2
+          },
+          {
+            "filename": "GOPR1085.jpg",
+            "order": 3
+          },
+          {
+            "filename": "GOPR1091 (2).jpg",
+            "order": 4
+          },
+          {
+            "filename": "GOPR1091.jpg",
+            "order": 5
+          },
+          {
+            "filename": "GOPR1093 (2).jpg",
+            "order": 6
+          },
+          {
+            "filename": "GOPR1093.jpg",
+            "order": 7
+          },
+          {
+            "filename": "GOPR1097 (2).jpg",
+            "order": 8
+          },
+          {
+            "filename": "GOPR1097.jpg",
+            "order": 9
+          },
+          {
+            "filename": "GOPR1099 (2).jpg",
+            "order": 10
+          },
+          {
+            "filename": "GOPR1099.jpg",
+            "order": 11
+          },
+          {
+            "filename": "GOPR1102 (2).jpg",
+            "order": 12
+          },
+          {
+            "filename": "GOPR1102.jpg",
+            "order": 13
+          },
+          {
+            "filename": "GOPR1113 (2).jpg",
+            "order": 14
+          },
+          {
+            "filename": "GOPR1113.jpg",
+            "order": 15
+          },
+          {
+            "filename": "GOPR1116 (2).jpg",
+            "order": 16
+          },
+          {
+            "filename": "GOPR1116.jpg",
+            "order": 17
+          },
+          {
+            "filename": "GOPR1120 (2).jpg",
+            "order": 18
+          },
+          {
+            "filename": "GOPR1120.jpg",
+            "order": 19
+          },
+          {
+            "filename": "GOPR1126 (2).jpg",
+            "order": 20
+          },
+          {
+            "filename": "GOPR1126.jpg",
+            "order": 21
+          },
+          {
+            "filename": "GOPR1241 (2).jpg",
+            "order": 22
+          },
+          {
+            "filename": "GOPR1241.jpg",
+            "order": 23
+          },
+          {
+            "filename": "GOPR1243 (2).jpg",
+            "order": 24
+          },
+          {
+            "filename": "GOPR1243.jpg",
+            "order": 25
+          },
+          {
+            "filename": "GOPR1248 (2).jpg",
+            "order": 26
+          },
+          {
+            "filename": "GOPR1248.jpg",
+            "order": 27
+          },
+          {
+            "filename": "IMG-20240918-WA0030 (2).jpg",
+            "order": 28
+          },
+          {
+            "filename": "IMG-20240918-WA0030.jpg",
+            "order": 29
+          },
+          {
+            "filename": "IMG-20240918-WA0031 (2).jpg",
+            "order": 30
+          },
+          {
+            "filename": "IMG-20240918-WA0031.jpg",
+            "order": 31
+          },
+          {
+            "filename": "IMG_2350 (2).jpg",
+            "order": 32
+          },
+          {
+            "filename": "IMG_2350.jpg",
+            "order": 33
+          },
+          {
+            "filename": "IMG_2352 (2).jpg",
+            "order": 34
+          },
+          {
+            "filename": "IMG_2352.jpg",
+            "order": 35
+          },
+          {
+            "filename": "IMG_2358 (2).jpg",
+            "order": 36
+          },
+          {
+            "filename": "IMG_2358.jpg",
+            "order": 37
+          },
+          {
+            "filename": "IMG_2361 (2).jpg",
+            "order": 38
+          },
+          {
+            "filename": "IMG_2361.jpg",
+            "order": 39
+          },
+          {
+            "filename": "IMG_2378 (2).jpg",
+            "order": 40
+          },
+          {
+            "filename": "IMG_2378.jpg",
+            "order": 41
+          },
+          {
+            "filename": "IMG_2379 (2).jpg",
+            "order": 42
+          },
+          {
+            "filename": "IMG_2379.jpg",
+            "order": 43
+          },
+          {
+            "filename": "IMG_2380 (2).jpg",
+            "order": 44
+          },
+          {
+            "filename": "IMG_2380.jpg",
+            "order": 45
+          },
+          {
+            "filename": "IMG_2601 (2).jpg",
+            "order": 46
+          },
+          {
+            "filename": "IMG_2601.jpg",
+            "order": 47
+          },
+          {
+            "filename": "IMG_2605 (2).jpg",
+            "order": 48
+          },
+          {
+            "filename": "IMG_2605.jpg",
+            "order": 49
+          },
+          {
+            "filename": "IMG_2733 (2).jpg",
+            "order": 50
+          },
+          {
+            "filename": "IMG_2733.jpg",
+            "order": 51
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "TopLine",
+    "description": "Premium inflatable boats combining exceptional comfort with advanced technology",
+    "image": "850TL-5(1).jpg",
+    "heroImage": "TopLine.jpg",
+    "mainGroup": "inflatableBoats",
+    "order": 2,
+    "models": [
+      {
+        "id": 5,
+        "name": "TL650",
+        "description": "Premium inflatable for discerning owners.",
+        "shortDescription": "Discerning owner's choice.",
+        "imageFile": "0179.jpg",
+        "heroImageFile": "0179.jpg",
+        "contentImageFile": "0242.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "An agile and stylish RIB built for pure enjoyment on the water. The TL650 combines efficient performance with Tiger Marine's signature craftsmanship and attention to detail.",
+        "categoryName": "TopLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "6.50 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.80 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "58 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "15"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X200 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X150 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X115 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "105 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Hypalon tubes",
+            "order": 0
+          },
+          {
+            "feature": "Center Console with front seat",
+            "order": 1
+          },
+          {
+            "feature": "Built-in full width rear seat",
+            "order": 2
+          },
+          {
+            "feature": "Normal / Standup driving seat with rear seat with new standup mechanism",
+            "order": 3
+          },
+          {
+            "feature": "Fiberglass / Aluminum rollbar",
+            "order": 4
+          },
+          {
+            "feature": "105 Liter Fuel tank",
+            "order": 5
+          },
+          {
+            "feature": "Built-in large fiberglass bow step with roller",
+            "order": 6
+          },
+          {
+            "feature": "Ambient blue led lights in seat and console",
+            "order": 7
+          },
+          {
+            "feature": "Swimming platforms",
+            "order": 8
+          },
+          {
+            "feature": "Front removable sundeck",
+            "order": 9
+          },
+          {
+            "feature": "Cup holders",
+            "order": 10
+          },
+          {
+            "feature": "Electric bilge pump",
+            "order": 11
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Hinged aluminum rollbar",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Boat cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Removable table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Aft removable sundeck",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "S.S Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Cup holders with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Retractable ski pole",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "0179.jpg",
+            "order": 0
+          },
+          {
+            "filename": "0242.jpg",
+            "order": 1
+          },
+          {
+            "filename": "0243.jpg",
+            "order": 2
+          },
+          {
+            "filename": "650TL-2(1).jpg",
+            "order": 3
+          },
+          {
+            "filename": "650TL-RD2.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0185.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0658.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0660.jpg",
+            "order": 7
+          },
+          {
+            "filename": "DJI_0668.jpg",
+            "order": 8
+          },
+          {
+            "filename": "DJI_0687.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_2324.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_2340.jpg",
+            "order": 11
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "Bow-sundeck.jpg",
+            "order": 0
+          },
+          {
+            "filename": "Bow.jpg",
+            "order": 1
+          },
+          {
+            "filename": "Console.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_6066.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_6073(1).jpg",
+            "order": 4
+          },
+          {
+            "filename": "IMG_6074(1).jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_6077(1).jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_6079(1).jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_6082(1).jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_6088.jpg",
+            "order": 9
+          },
+          {
+            "filename": "Seat-1.jpg",
+            "order": 10
+          },
+          {
+            "filename": "Stern-Sundeck.jpg",
+            "order": 11
+          },
+          {
+            "filename": "Table.jpg",
+            "order": 12
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "TL750",
+        "description": "Exceptional comfort and performance in a compact package.",
+        "shortDescription": "Comfort and performance combined.",
+        "imageFile": "750TL-Sport Fishing.jpg",
+        "heroImageFile": "750TL-Sport Fishing.jpg",
+        "contentImageFile": "750TL-Sport-Fishing-2.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Compact yet powerful, the TL750 offers exceptional versatility. Its advanced hull shape ensures smooth rides, while its layout provides comfort for both leisure and water sports.",
+        "categoryName": "TopLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "7.50 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.90 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "59 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "16"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X250 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X250 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X200 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "210 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Hypalon tubes",
+            "order": 0
+          },
+          {
+            "feature": "Large console with front door for optional toilet ( toilet is not included )",
+            "order": 1
+          },
+          {
+            "feature": "Large rear seat with U shape seats",
+            "order": 2
+          },
+          {
+            "feature": "Rear seat back with three different position",
+            "order": 3
+          },
+          {
+            "feature": "Fiberglass / Aluminum rollbar",
+            "order": 4
+          },
+          {
+            "feature": "Aft table",
+            "order": 5
+          },
+          {
+            "feature": "AFt sundeck",
+            "order": 6
+          },
+          {
+            "feature": "Standup driving seat equipped with kitchen station including sink and ready for electric fridge",
+            "order": 7
+          },
+          {
+            "feature": "60 liter water tank with shower and pump",
+            "order": 8
+          },
+          {
+            "feature": "Hard fiberglass bow step with built-in windlass compartment (windlass is not included)",
+            "order": 9
+          },
+          {
+            "feature": "Ambient blue lights in driver seat",
+            "order": 10
+          },
+          {
+            "feature": "210 Liter fuel tank",
+            "order": 11
+          },
+          {
+            "feature": "Full size bow sundeck with cushions",
+            "order": 12
+          },
+          {
+            "feature": "Automatic electric bilge pump",
+            "order": 13
+          },
+          {
+            "feature": "Deck self-drain system",
+            "order": 14
+          },
+          {
+            "feature": "Cup holders",
+            "order": 15
+          },
+          {
+            "feature": "Front Sundeck extension",
+            "order": 16
+          },
+          {
+            "feature": "Swimming platforms with ladder compartment and hand rails",
+            "order": 17
+          },
+          {
+            "feature": "Large bow storage compartment with hydraulic hatch",
+            "order": 18
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Hinged aluminum rollbar",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Fiberglass T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "T-top extension shade",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Boat cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Electric toilet system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Electric windlass with anchor and ropes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "S.S. ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Cup holders with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Ski pole",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          },
+          {
+            "name": "Texture hypalon tubes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 16
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 17
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "750TL-Sport Fishing.jpg",
+            "order": 0
+          },
+          {
+            "filename": "750TL-Sport-Fishing-2.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0007.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0035.jpg",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0521.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0818.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0836.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0943.jpg",
+            "order": 7
+          },
+          {
+            "filename": "DJI_0952.jpg",
+            "order": 8
+          },
+          {
+            "filename": "DJI_0971.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_2093.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_2130.jpg",
+            "order": 11
+          },
+          {
+            "filename": "IMG_2942.jpg",
+            "order": 12
+          },
+          {
+            "filename": "TopLine-750 - -2.jpg",
+            "order": 13
+          },
+          {
+            "filename": "TopLine-750---2.jpg",
+            "order": 14
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "GOPR1067.jpg",
+            "order": 0
+          },
+          {
+            "filename": "IMG_1923.jpg",
+            "order": 1
+          },
+          {
+            "filename": "IMG_1937.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_1950.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_1952.jpg",
+            "order": 4
+          },
+          {
+            "filename": "IMG_1953.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_1956.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_1966.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_2014.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_2018.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_2026.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_2029.jpg",
+            "order": 11
+          },
+          {
+            "filename": "IMG_2035.jpg",
+            "order": 12
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "TL850",
+        "description": "Premium inflatable with exceptional design and performance.",
+        "shortDescription": "Premium design and comfort.",
+        "imageFile": "850TL - 1.jpg",
+        "heroImageFile": "850TL - 1.jpg",
+        "contentImageFile": "850TL-10.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "A perfect balance between sporty handling and practical luxury. The TL850 features a sleek hull design and optimized deck layout, making it ideal for day trips or weekend escapes.",
+        "categoryName": "TopLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": " 8.60 m"
+          },
+          {
+            "key": "Beam",
+            "value": "3.15 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "65 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "18"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X350 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X300 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X250 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XXL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "60 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "450 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Hypalon tubes",
+            "order": 0
+          },
+          {
+            "feature": "Large console with front door for optional toilet ( toilet is not included )",
+            "order": 1
+          },
+          {
+            "feature": "Large rear seat with U shape seats",
+            "order": 2
+          },
+          {
+            "feature": "Aft seat back with three different position",
+            "order": 3
+          },
+          {
+            "feature": "Fiberglass / Aluminum rollbar",
+            "order": 4
+          },
+          {
+            "feature": "AFt table / sundeck",
+            "order": 5
+          },
+          {
+            "feature": "Standup driving seat equipped with kitchen station including sink and ready for electric fridge and stove",
+            "order": 6
+          },
+          {
+            "feature": "60 liter water tank with shower and pump",
+            "order": 7
+          },
+          {
+            "feature": "Hard fiberglass bow step with built-in windlass compartment (windlass is not included)",
+            "order": 8
+          },
+          {
+            "feature": "Ambient blue lights in driver seat",
+            "order": 9
+          },
+          {
+            "feature": "280 Liter fuel tank",
+            "order": 10
+          },
+          {
+            "feature": "Full size bow sundeck with cushions",
+            "order": 11
+          },
+          {
+            "feature": "Automatic electric bilge pump",
+            "order": 12
+          },
+          {
+            "feature": "Deck self-drain system",
+            "order": 13
+          },
+          {
+            "feature": "Cup holders",
+            "order": 14
+          },
+          {
+            "feature": "Front Sundeck extension",
+            "order": 15
+          },
+          {
+            "feature": "Swimming platforms with ladder compartment and hand rails",
+            "order": 16
+          },
+          {
+            "feature": "Large bow storage compartment with hydraulic hatch",
+            "order": 17
+          },
+          {
+            "feature": "Large rear seat with U shape seats",
+            "order": 18
+          },
+          {
+            "feature": "Aft seat back with three different position",
+            "order": 19
+          },
+          {
+            "feature": "Fiberglass / Aluminum rollbar",
+            "order": 20
+          },
+          {
+            "feature": "AFt table / sundeck",
+            "order": 21
+          },
+          {
+            "feature": "Standup driving seat equipped with kitchen station including sink and ready for electric fridge and stove",
+            "order": 22
+          },
+          {
+            "feature": "60 liter water tank with shower and pump",
+            "order": 23
+          },
+          {
+            "feature": "Hard fiberglass bow step with built-in windlass compartment (windlass is not included)",
+            "order": 24
+          },
+          {
+            "feature": "Ambient blue lights in driver seat",
+            "order": 25
+          },
+          {
+            "feature": "280 Liter fuel tank",
+            "order": 26
+          },
+          {
+            "feature": "Full size bow sundeck with cushions",
+            "order": 27
+          },
+          {
+            "feature": "Automatic electric bilge pump",
+            "order": 28
+          },
+          {
+            "feature": "Deck self-drain system",
+            "order": 29
+          },
+          {
+            "feature": "Cup holders",
+            "order": 30
+          },
+          {
+            "feature": "Front Sundeck extension",
+            "order": 31
+          },
+          {
+            "feature": "Swimming platforms with ladder compartment and hand rails",
+            "order": 32
+          },
+          {
+            "feature": "Large bow storage compartment with hydraulic hatch",
+            "order": 33
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Hinged aluminum rollbar",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Fiberglass T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "T-top extension shade",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Boat cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Electric toilet system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Electric windlass with anchor and ropes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "S.S. ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Cup holders with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Ski pole",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          },
+          {
+            "name": "Texture hypalon tubes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 16
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 17
+          },
+          {
+            "name": "Waste tank",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 18
+          },
+          {
+            "name": "Fridge",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 19
+          },
+          {
+            "name": "Gas cooker",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 20
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "850TL - 1.jpg",
+            "order": 0
+          },
+          {
+            "filename": "850TL-10.jpg",
+            "order": 1
+          },
+          {
+            "filename": "850TL-2(1).jpg",
+            "order": 2
+          },
+          {
+            "filename": "850TL-3.jpg",
+            "order": 3
+          },
+          {
+            "filename": "850TL-5(1).jpg",
+            "order": 4
+          },
+          {
+            "filename": "850TL-6.jpg",
+            "order": 5
+          },
+          {
+            "filename": "850TL-9(1).jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_0916.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_1078.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_1139.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_1148.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_5398.jpg",
+            "order": 11
+          },
+          {
+            "filename": "Snapshot_14.jpg",
+            "order": 12
+          },
+          {
+            "filename": "Snapshot_5.jpg",
+            "order": 13
+          },
+          {
+            "filename": "TL850.jpg",
+            "order": 14
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "Anchor compartment.jpg",
+            "order": 0
+          },
+          {
+            "filename": "Bimini top.jpg",
+            "order": 1
+          },
+          {
+            "filename": "Bow compartment.jpg",
+            "order": 2
+          },
+          {
+            "filename": "Bow sundeck.jpg",
+            "order": 3
+          },
+          {
+            "filename": "Cabin1.jpg",
+            "order": 4
+          },
+          {
+            "filename": "Cabin2.jpg",
+            "order": 5
+          },
+          {
+            "filename": "Cabin3.jpg",
+            "order": 6
+          },
+          {
+            "filename": "Console.jpg",
+            "order": 7
+          },
+          {
+            "filename": "Kitchenet.jpg",
+            "order": 8
+          },
+          {
+            "filename": "Rear Sundeck.jpg",
+            "order": 9
+          },
+          {
+            "filename": "Toilet.jpg",
+            "order": 10
+          },
+          {
+            "filename": "TopLine 850 Logo.jpg",
+            "order": 11
+          },
+          {
+            "filename": "rear table.jpg",
+            "order": 12
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "TL950",
+        "description": "The ultimate expression of luxury and power in inflatable boating.",
+        "shortDescription": "Premium inflatable designed for the discerning mariner.",
+        "imageFile": "950TL-BS-1.jpg",
+        "heroImageFile": "950TL-BS-1.jpg",
+        "contentImageFile": "950TL-BS-3.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Designed for those who demand both comfort and capability. The TL950 offers exceptional offshore performance, generous seating, and refined detailing for family or sport adventures alike.",
+        "categoryName": "TopLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "9.60 m"
+          },
+          {
+            "key": "Beam",
+            "value": "3.20 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "63 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "20"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "2X250 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "2X250 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "2X200 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "60 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "450 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Hypalon tubes.",
+            "order": 0
+          },
+          {
+            "feature": "Large center console with front door for optional toilet installation equipped with glass sink, tab and storage compartment.",
+            "order": 1
+          },
+          {
+            "feature": "Large AFt seat with U shape seats , can accommodate ski equipment and fishing rods",
+            "order": 2
+          },
+          {
+            "feature": "Fiberglass / Aluminum rollbar",
+            "order": 3
+          },
+          {
+            "feature": "AFt table / Sundeck",
+            "order": 4
+          },
+          {
+            "feature": "Large swimming platforms with ladders compartments and handrails ready for two ladders",
+            "order": 5
+          },
+          {
+            "feature": "Hard fiberglass bow with electric anchor compartment.",
+            "order": 6
+          },
+          {
+            "feature": "Sporty Driver seat with standup / seat system",
+            "order": 7
+          },
+          {
+            "feature": "Kitchen unit with built-in sink with foldable tab and ready for electric fridge and stove.",
+            "order": 8
+          },
+          {
+            "feature": "60 Liter water tank.",
+            "order": 9
+          },
+          {
+            "feature": "Wide side steps .",
+            "order": 10
+          },
+          {
+            "feature": "Heavy duty top quality valves",
+            "order": 11
+          },
+          {
+            "feature": "450 Liter fuel tank",
+            "order": 12
+          },
+          {
+            "feature": "Driver seat blue ambient light",
+            "order": 13
+          },
+          {
+            "feature": "Freshwater shower system with 60 Liter water tank",
+            "order": 14
+          },
+          {
+            "feature": "Stainless steel electric switches with led lights",
+            "order": 15
+          },
+          {
+            "feature": "Automatic electric bilge pump",
+            "order": 16
+          },
+          {
+            "feature": "Marine grade high quality upholstery with cushions",
+            "order": 17
+          },
+          {
+            "feature": "Cup holders",
+            "order": 18
+          },
+          {
+            "feature": "Swimming platforms with ladder compartment and hand rails",
+            "order": 19
+          },
+          {
+            "feature": "Large bow storage compartment with gas spring hatch",
+            "order": 20
+          },
+          {
+            "feature": "Gas spring hatches .",
+            "order": 21
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Stainless steel bimini top - one forward one backward",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Hinged aluminum rollbar",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Fiberglass T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "T-top extension shade",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Boat cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Electric toilet system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Electric windlass with anchor and ropes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "S.S. ladder - up to two ladders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Cup holders with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Ski pole",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          },
+          {
+            "name": "Texture hypalon tubes",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 16
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 17
+          },
+          {
+            "name": "Waste tank",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 18
+          },
+          {
+            "name": "Fridge",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 19
+          },
+          {
+            "name": "Gas cooker",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 20
+          },
+          {
+            "name": "Electric table / Sundeck",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 21
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "950TL-BS-1.jpg",
+            "order": 0
+          },
+          {
+            "filename": "950TL-BS-3.jpg",
+            "order": 1
+          },
+          {
+            "filename": "950TL-BS-4.jpg",
+            "order": 2
+          },
+          {
+            "filename": "950TL-HR-1.jpg",
+            "order": 3
+          },
+          {
+            "filename": "950TL-HR.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0150.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0168.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0180.jpg",
+            "order": 7
+          },
+          {
+            "filename": "DJI_0247.jpg",
+            "order": 8
+          },
+          {
+            "filename": "DJI_0249.jpg",
+            "order": 9
+          },
+          {
+            "filename": "DJI_0261.jpg",
+            "order": 10
+          },
+          {
+            "filename": "DJI_0277.jpg",
+            "order": 11
+          },
+          {
+            "filename": "DJI_0366.jpg",
+            "order": 12
+          },
+          {
+            "filename": "DJI_0381.jpg",
+            "order": 13
+          },
+          {
+            "filename": "DJI_0592.jpg",
+            "order": 14
+          },
+          {
+            "filename": "DJI_0605.jpg",
+            "order": 15
+          }
+        ],
+        "interiorFiles": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "ProLine",
+    "description": "Professional-grade inflatable boats for commercial and charter operations",
+    "image": "DJI_0465.jpg",
+    "heroImage": "ProLine.jpg",
+    "mainGroup": "inflatableBoats",
+    "order": 3,
+    "models": [
+      {
+        "id": 7,
+        "name": "PL550",
+        "description": "Professional inflatable for commercial use.",
+        "shortDescription": "Commercial-grade performance.",
+        "imageFile": "DJI_0529.jpg",
+        "heroImageFile": "DJI_0529.jpg",
+        "contentImageFile": "DJI_0589.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Compact and efficient, the PL550 is designed for versatility and endurance. It's a trusted companion for both recreational users and professional operators.",
+        "categoryName": "ProLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "5.65 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.30 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "52 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "5"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "9"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X115 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X90 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X75 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "70 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Built-in Center Console - no steering system",
+            "order": 0
+          },
+          {
+            "feature": "Built-in large rear  seat",
+            "order": 1
+          },
+          {
+            "feature": "Stand up driving seat with back foldable table",
+            "order": 2
+          },
+          {
+            "feature": "75 Liter fuel tank",
+            "order": 3
+          },
+          {
+            "feature": "Fiberglass bow step with roller",
+            "order": 4
+          },
+          {
+            "feature": "Full boat Cushions",
+            "order": 5
+          },
+          {
+            "feature": "Swimming plateforms",
+            "order": 6
+          },
+          {
+            "feature": "Sundeck",
+            "order": 7
+          },
+          {
+            "feature": "Electric bilge pump with electric panel",
+            "order": 8
+          },
+          {
+            "feature": "Deck selfdrain system",
+            "order": 9
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Bow table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Large tube side steps with teak and handles",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Telescopic S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Deck led lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "DJI_0529.jpg",
+            "order": 0
+          },
+          {
+            "filename": "DJI_0589.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0595.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0625.jpg",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0678.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0689.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0706.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0707.jpg",
+            "order": 7
+          },
+          {
+            "filename": "DJI_0715.jpg",
+            "order": 8
+          },
+          {
+            "filename": "DJI_0731.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_2968.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_3115.jpg",
+            "order": 11
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "Driver-foot-rest.jpg",
+            "order": 0
+          },
+          {
+            "filename": "Driver-seat - 1.jpg",
+            "order": 1
+          },
+          {
+            "filename": "Driver-seat--1.jpg",
+            "order": 2
+          },
+          {
+            "filename": "Driver-seat-2.jpg",
+            "order": 3
+          },
+          {
+            "filename": "Driver-seat-builtin-table.jpg",
+            "order": 4
+          },
+          {
+            "filename": "Driver-seat-table-closed.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_1806.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_2943.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_2946.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_2951.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_2952.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_2962.jpg",
+            "order": 11
+          },
+          {
+            "filename": "IMG_2964.jpg",
+            "order": 12
+          },
+          {
+            "filename": "IMG_2967.jpg",
+            "order": 13
+          },
+          {
+            "filename": "IMG_2976.jpg",
+            "order": 14
+          },
+          {
+            "filename": "IMG_2979.jpg",
+            "order": 15
+          },
+          {
+            "filename": "IMG_3001.jpg",
+            "order": 16
+          },
+          {
+            "filename": "Large-stern-seat.jpg",
+            "order": 17
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "PL620",
+        "description": "Professional inflatable designed for charter and commercial operations.",
+        "shortDescription": "Professional charter inflatable.",
+        "imageFile": "DJI_0339.jpg",
+        "heroImageFile": "DJI_0339.jpg",
+        "contentImageFile": "DJI_0465.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Built for professionals and enthusiasts who value reliability and strength. The PL620 offers durable construction, excellent stability, and practical design for fishing, diving, or patrol use.",
+        "categoryName": "ProLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "6.25 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.65 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "56 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "12"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X150 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X150 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X115 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "105 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Built-in Center Console",
+            "order": 0
+          },
+          {
+            "feature": "Two way double driving seat with back foldable table",
+            "order": 1
+          },
+          {
+            "feature": "Built-in large aft seat with extension",
+            "order": 2
+          },
+          {
+            "feature": "100 Liter below deck fuel tank",
+            "order": 3
+          },
+          {
+            "feature": "Fiberglass bow step with cleat",
+            "order": 4
+          },
+          {
+            "feature": "Sundeck",
+            "order": 5
+          },
+          {
+            "feature": "Swimming platforms",
+            "order": 6
+          },
+          {
+            "feature": "Electric bilge pump with electric panel",
+            "order": 7
+          },
+          {
+            "feature": "Deck self drain system",
+            "order": 8
+          },
+          {
+            "feature": "Ambient blue lights",
+            "order": 9
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Fiberglass T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "DJI_0339.jpg",
+            "order": 0
+          },
+          {
+            "filename": "DJI_0465.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0490.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0510.jpg",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0513.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0555.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0608.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_1272.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_2025.jpg",
+            "order": 8
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "GOPR0315.jpg",
+            "order": 0
+          },
+          {
+            "filename": "GOPR0325.jpg",
+            "order": 1
+          },
+          {
+            "filename": "GOPR0333.jpg",
+            "order": 2
+          },
+          {
+            "filename": "GOPR0338.jpg",
+            "order": 3
+          },
+          {
+            "filename": "GOPR0343.jpg",
+            "order": 4
+          },
+          {
+            "filename": "GOPR0348.jpg",
+            "order": 5
+          },
+          {
+            "filename": "GOPR0352.jpg",
+            "order": 6
+          },
+          {
+            "filename": "GOPR0353.jpg",
+            "order": 7
+          },
+          {
+            "filename": "GOPR0359.jpg",
+            "order": 8
+          },
+          {
+            "filename": "GOPR0362.jpg",
+            "order": 9
+          },
+          {
+            "filename": "GOPR0366.jpg",
+            "order": 10
+          },
+          {
+            "filename": "GOPR0373.jpg",
+            "order": 11
+          },
+          {
+            "filename": "GOPR0377.jpg",
+            "order": 12
+          },
+          {
+            "filename": "IMG_1270.jpg",
+            "order": 13
+          },
+          {
+            "filename": "IMG_1271.jpg",
+            "order": 14
+          },
+          {
+            "filename": "IMG_1272.jpg",
+            "order": 15
+          },
+          {
+            "filename": "IMG_1291.jpg",
+            "order": 16
+          },
+          {
+            "filename": "IMG_1315.jpg",
+            "order": 17
+          },
+          {
+            "filename": "IMG_1319.jpg",
+            "order": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "SportLine",
+    "description": "High-performance inflatable boats for the active and adventurous mariner",
+    "image": null,
+    "heroImage": null,
+    "mainGroup": "inflatableBoats",
+    "order": 4,
+    "models": [
+      {
+        "id": 9,
+        "name": "SL480",
+        "description": "Sport performance and comfort in a compact package.",
+        "shortDescription": "Performance meets comfort.",
+        "imageFile": "480SL1.jpg",
+        "heroImageFile": "480SL1.jpg",
+        "contentImageFile": "480SL2.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "A small but capable performer. The SL480 offers easy handling, durability, and the same premium feel as Tiger Marine's larger models — in a compact form.",
+        "categoryName": "SportLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "4.85 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.25 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "55 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "5"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "9"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X90 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X75 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X60 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "L"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "FuelTank",
+            "value": "105 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Built-in Side Console",
+            "order": 0
+          },
+          {
+            "feature": "Built-in Double driving seat",
+            "order": 1
+          },
+          {
+            "feature": "Fiberglass bow step with cleat",
+            "order": 2
+          },
+          {
+            "feature": "75 Liter fuel tank",
+            "order": 3
+          },
+          {
+            "feature": "two cleats on the side",
+            "order": 4
+          },
+          {
+            "feature": "Full boat Cushions",
+            "order": 5
+          },
+          {
+            "feature": "Sundeck",
+            "order": 6
+          },
+          {
+            "feature": "3 cup holders",
+            "order": 7
+          },
+          {
+            "feature": "Swimming plateforms",
+            "order": 8
+          },
+          {
+            "feature": "Console built-in ambient blue light",
+            "order": 9
+          },
+          {
+            "feature": "Electric bilge pump with electric panel",
+            "order": 10
+          },
+          {
+            "feature": "Deck selfdrain system",
+            "order": 11
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Steering system - mech. or Hydraulic",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Bow table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Extra cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "480SL1.jpg",
+            "order": 0
+          },
+          {
+            "filename": "480SL2.jpg",
+            "order": 1
+          },
+          {
+            "filename": "IMG_9553.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_9621.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_9623.jpg",
+            "order": 4
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "IMG_9554.jpg",
+            "order": 0
+          },
+          {
+            "filename": "IMG_9559.jpg",
+            "order": 1
+          },
+          {
+            "filename": "IMG_9562.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_9564.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_9566.jpg",
+            "order": 4
+          },
+          {
+            "filename": "IMG_9568.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_9569.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_9570.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_9575.jpg",
+            "order": 8
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "SL520",
+        "description": "Perfect blend of sport and comfort for the active boater.",
+        "shortDescription": "Sport inflatable for the active lifestyle.",
+        "imageFile": "520SL(1).jpg",
+        "heroImageFile": "520SL(1).jpg",
+        "contentImageFile": "C0109T01.JPG",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Dynamic, lightweight, and full of energy — the SL520 embodies the spirit of fun on the water. Perfect for sports, family outings, or tender use.",
+        "categoryName": "SportLine",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "5.25 m"
+          },
+          {
+            "key": "Beam",
+            "value": "2.25 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "55 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "5"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "10"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X115 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X90 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X75 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "L"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "FuelTank",
+            "value": "70 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Built-in Side Console",
+            "order": 0
+          },
+          {
+            "feature": "Built-in Double driving seat",
+            "order": 1
+          },
+          {
+            "feature": "Fiberglass bow step with cleat",
+            "order": 2
+          },
+          {
+            "feature": "75 Liter fuel tank",
+            "order": 3
+          },
+          {
+            "feature": "two cleats on the side",
+            "order": 4
+          },
+          {
+            "feature": "Full boat Cushions",
+            "order": 5
+          },
+          {
+            "feature": "Sundeck",
+            "order": 6
+          },
+          {
+            "feature": "3 cup holders",
+            "order": 7
+          },
+          {
+            "feature": "Swimming plateforms",
+            "order": 8
+          },
+          {
+            "feature": "Console built-in ambient blue light",
+            "order": 9
+          },
+          {
+            "feature": "Electric bilge pump with electric panel",
+            "order": 10
+          },
+          {
+            "feature": "Deck selfdrain system",
+            "order": 11
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Bow table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Deck led lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Hydraulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "520SL(1).jpg",
+            "order": 0
+          },
+          {
+            "filename": "C0109T01.JPG",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0170.JPG",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0177.JPG",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0196.JPG",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0202.JPG",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0239.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0250.jpg",
+            "order": 7
+          },
+          {
+            "filename": "DSC00010.JPG",
+            "order": 8
+          },
+          {
+            "filename": "DSC00113.JPG",
+            "order": 9
+          },
+          {
+            "filename": "DSC00126.JPG",
+            "order": 10
+          },
+          {
+            "filename": "DSC00131.JPG",
+            "order": 11
+          },
+          {
+            "filename": "DSC09689.JPG",
+            "order": 12
+          },
+          {
+            "filename": "IMG_0946.jpg",
+            "order": 13
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "Abmient-light.jpg",
+            "order": 0
+          },
+          {
+            "filename": "C0014T01.JPG",
+            "order": 1
+          },
+          {
+            "filename": "C0016T01.JPG",
+            "order": 2
+          },
+          {
+            "filename": "C0017T01.JPG",
+            "order": 3
+          },
+          {
+            "filename": "C0019T01.JPG",
+            "order": 4
+          },
+          {
+            "filename": "C0022T01.JPG",
+            "order": 5
+          },
+          {
+            "filename": "C0023T01.JPG",
+            "order": 6
+          },
+          {
+            "filename": "DSC09692.JPG",
+            "order": 7
+          },
+          {
+            "filename": "Seat.jpg",
+            "order": 8
+          },
+          {
+            "filename": "bimini-base.jpg",
+            "order": 9
+          },
+          {
+            "filename": "console-2.jpg",
+            "order": 10
+          },
+          {
+            "filename": "console-4.jpg",
+            "order": 11
+          },
+          {
+            "filename": "console-front.jpg",
+            "order": 12
+          },
+          {
+            "filename": "cup-holder.jpg",
+            "order": 13
+          },
+          {
+            "filename": "rear-part.jpg",
+            "order": 14
+          },
+          {
+            "filename": "stern(1).jpg",
+            "order": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Open",
+    "description": "Open-deck inflatable boats for maximum connection with the sea",
+    "image": null,
+    "heroImage": null,
+    "mainGroup": "inflatableBoats",
+    "order": 5,
+    "models": [
+      {
+        "id": 12,
+        "name": "OP650",
+        "description": "Open deck for enhanced enjoyment.",
+        "shortDescription": "Enhanced open deck experience.",
+        "imageFile": "DJI_0746.jpg",
+        "heroImageFile": "DJI_0746.jpg",
+        "contentImageFile": "DJI_0802.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Compact yet capable, the OP650 provides excellent stability, responsive control, and modern aesthetics — perfect for those seeking accessible adventure.",
+        "categoryName": "Open",
+        "specs": [
+          {
+            "key": "Beam",
+            "value": "2.55 m"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "45 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "105 Liter"
+          },
+          {
+            "key": "Length",
+            "value": "6.50 m"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X150 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X115 HP"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "14"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X140 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "56 cm"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Medium Center Console",
+            "order": 0
+          },
+          {
+            "feature": "Aft Seat with foldable backrest",
+            "order": 1
+          },
+          {
+            "feature": "Bow step with roller",
+            "order": 2
+          },
+          {
+            "feature": "swimming platforms",
+            "order": 3
+          },
+          {
+            "feature": "Double driving Seat with standup position.",
+            "order": 4
+          },
+          {
+            "feature": "105 Liter fuel tank package",
+            "order": 5
+          },
+          {
+            "feature": "Tube side steps with teak and handles",
+            "order": 6
+          },
+          {
+            "feature": "Bilge pump",
+            "order": 7
+          },
+          {
+            "feature": "Electric switch panel",
+            "order": 8
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Aluminum T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Bow or aft table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Foam Teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Hydrulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "DJI_0746.jpg",
+            "order": 0
+          },
+          {
+            "filename": "DJI_0802.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0806.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0846.jpg",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0874.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0888.jpg",
+            "order": 5
+          },
+          {
+            "filename": "DJI_0910.jpg",
+            "order": 6
+          },
+          {
+            "filename": "DJI_0922.jpg",
+            "order": 7
+          },
+          {
+            "filename": "_072_Itai_2022.jpg",
+            "order": 8
+          },
+          {
+            "filename": "_104_Itai_2022.jpg",
+            "order": 9
+          },
+          {
+            "filename": "_112_Itai_2022.jpg",
+            "order": 10
+          },
+          {
+            "filename": "_118_Itai_2022.jpg",
+            "order": 11
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "IMG_5650.jpg",
+            "order": 0
+          },
+          {
+            "filename": "IMG_5674.jpg",
+            "order": 1
+          },
+          {
+            "filename": "IMG_5675.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_5676.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_5677.jpg",
+            "order": 4
+          },
+          {
+            "filename": "IMG_5678.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_5679.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_5680.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_5683.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_5684.jpg",
+            "order": 9
+          },
+          {
+            "filename": "_DSC0019.JPG",
+            "order": 10
+          },
+          {
+            "filename": "_DSC0233.JPG",
+            "order": 11
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "name": "OP750",
+        "description": "Large open deck design for enhanced enjoyment.",
+        "shortDescription": "Large open deck design.",
+        "imageFile": "1.jpg",
+        "heroImageFile": "1.jpg",
+        "contentImageFile": "5.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "A versatile mid-size RIB combining comfort, functionality, and sleek design. Ideal for cruising, diving, or family day trips.",
+        "categoryName": "Open",
+        "specs": [
+          {
+            "key": "Beam",
+            "value": "2.80 m"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "N/A"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "60 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "210 Liter"
+          },
+          {
+            "key": "Length",
+            "value": "7.50 m "
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X250 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X150 HP"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "16"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X200 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XL"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "6"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "59 cm"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Large center console",
+            "order": 0
+          },
+          {
+            "feature": "Standup driving seat with aft seat",
+            "order": 1
+          },
+          {
+            "feature": "Aft Seat with foldable backrest",
+            "order": 2
+          },
+          {
+            "feature": "210 Liter fuel tank",
+            "order": 3
+          },
+          {
+            "feature": "Tube side steps with handle and cleat",
+            "order": 4
+          },
+          {
+            "feature": "Swimming platforms",
+            "order": 5
+          },
+          {
+            "feature": "Fiberglass bow step",
+            "order": 6
+          },
+          {
+            "feature": "Electric bilge pump with electric panel",
+            "order": 7
+          },
+          {
+            "feature": "Deck self-drain system",
+            "order": 8
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Boat cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Removable table",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "S.S. ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Foam teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Cup holders with lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Foldable Aluminum rollbar",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Aluminum T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Removable ski pole",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Removable bow sundeck",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          },
+          {
+            "name": "Hydrulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 16
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "1.jpg",
+            "order": 0
+          },
+          {
+            "filename": "5.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0035.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0992.jpg",
+            "order": 3
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "IMG_0432.jpg",
+            "order": 0
+          },
+          {
+            "filename": "IMG_0386.jpg",
+            "order": 1
+          },
+          {
+            "filename": "IMG_0386.jpg",
+            "order": 2
+          },
+          {
+            "filename": "IMG_0386.jpg",
+            "order": 3
+          },
+          {
+            "filename": "IMG_0388.jpg",
+            "order": 4
+          },
+          {
+            "filename": "IMG_0390.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_0391.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_0392.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_0397.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_0400.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_0404.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_0406.jpg",
+            "order": 11
+          },
+          {
+            "filename": "IMG_0412.jpg",
+            "order": 12
+          },
+          {
+            "filename": "IMG_0417.jpg",
+            "order": 13
+          },
+          {
+            "filename": "IMG_0419.jpg",
+            "order": 14
+          },
+          {
+            "filename": "IMG_0424.jpg",
+            "order": 15
+          },
+          {
+            "filename": "IMG_0432.jpg",
+            "order": 16
+          },
+          {
+            "filename": "IMG_0453.jpg",
+            "order": 17
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "OP850",
+        "description": "Expansive open deck for ultimate enjoyment.",
+        "shortDescription": "Ultimate open deck experience.",
+        "imageFile": "2.jpg",
+        "heroImageFile": "2.jpg",
+        "contentImageFile": "850OP.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "Spacious, open, and built for adventure. The OP850 delivers remarkable performance and freedom on the sea with its open-deck concept and powerful engine options.",
+        "categoryName": "Open",
+        "specs": [
+          {
+            "key": "Length",
+            "value": "8.40 m"
+          },
+          {
+            "key": "Beam",
+            "value": "3.00 X 2 m"
+          },
+          {
+            "key": "TubeDiameter",
+            "value": "59 cm"
+          },
+          {
+            "key": "TubeChambers",
+            "value": "7"
+          },
+          {
+            "key": "NumberOfPersons",
+            "value": "20"
+          },
+          {
+            "key": "NumberOfBedrooms",
+            "value": "N/A"
+          },
+          {
+            "key": "SleepingCapacity",
+            "value": "N/A"
+          },
+          {
+            "key": "MaxHP",
+            "value": "1X350 Or 2 X 250 HP"
+          },
+          {
+            "key": "RecommendedPower",
+            "value": "1X250 Or 2 X 200 HP"
+          },
+          {
+            "key": "MinPower",
+            "value": "1X250 Or 2 X 150 HP"
+          },
+          {
+            "key": "ShaftLength",
+            "value": "XXL or XL"
+          },
+          {
+            "key": "FreshwaterTank",
+            "value": "60 Liter"
+          },
+          {
+            "key": "FuelTank",
+            "value": "280 Liter"
+          },
+          {
+            "key": "BlackWaterTank",
+            "value": "45 liter"
+          },
+          {
+            "key": "DesignCategory",
+            "value": "C"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Large Toilet Console / Toilet is not included",
+            "order": 0
+          },
+          {
+            "feature": "Double standup Driving seat with aft seat",
+            "order": 1
+          },
+          {
+            "feature": "U- shape  rear seat",
+            "order": 2
+          },
+          {
+            "feature": "U- shape front seat",
+            "order": 3
+          },
+          {
+            "feature": "280 Liter fuel tank",
+            "order": 4
+          },
+          {
+            "feature": "Large fiberglass bow step",
+            "order": 5
+          },
+          {
+            "feature": "Tube side steps with teak and handles",
+            "order": 6
+          },
+          {
+            "feature": "Automatic bile pump",
+            "order": 7
+          },
+          {
+            "feature": "electric switch panel",
+            "order": 8
+          },
+          {
+            "feature": "Large swimming platforms",
+            "order": 9
+          }
+        ],
+        "optionalFeatures": [
+          {
+            "name": "Galvanized Aluminum T-top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 0
+          },
+          {
+            "name": "Eelctric toilet",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 1
+          },
+          {
+            "name": "Fresh water shower system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 2
+          },
+          {
+            "name": "Stainless steel bimini top",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 3
+          },
+          {
+            "name": "Boat Cover",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 4
+          },
+          {
+            "name": "Navigation lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 5
+          },
+          {
+            "name": "S.S. Ladder",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 6
+          },
+          {
+            "name": "Rear sundeck",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 7
+          },
+          {
+            "name": "Electric outlet socket",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 8
+          },
+          {
+            "name": "Music system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 9
+          },
+          {
+            "name": "Foam Teak parts",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 10
+          },
+          {
+            "name": "Fishing rod holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 11
+          },
+          {
+            "name": "Cup holders",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 12
+          },
+          {
+            "name": "Battery switch",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 13
+          },
+          {
+            "name": "Deck led lights",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 14
+          },
+          {
+            "name": "Hydrulic steering system",
+            "description": "",
+            "category": "",
+            "price": "",
+            "order": 15
+          }
+        ],
+        "galleryImages": [
+          {
+            "filename": "2.jpg",
+            "order": 0
+          },
+          {
+            "filename": "850OP.jpg",
+            "order": 1
+          },
+          {
+            "filename": "DJI_0140.jpg",
+            "order": 2
+          },
+          {
+            "filename": "DJI_0147.jpg",
+            "order": 3
+          },
+          {
+            "filename": "DJI_0150.jpg",
+            "order": 4
+          },
+          {
+            "filename": "DJI_0202.jpg",
+            "order": 5
+          },
+          {
+            "filename": "IMG_0618.jpg",
+            "order": 6
+          },
+          {
+            "filename": "IMG_0661.jpg",
+            "order": 7
+          },
+          {
+            "filename": "IMG_0716.jpg",
+            "order": 8
+          },
+          {
+            "filename": "IMG_0719.jpg",
+            "order": 9
+          },
+          {
+            "filename": "IMG_0729.jpg",
+            "order": 10
+          },
+          {
+            "filename": "IMG_6111.jpg",
+            "order": 11
+          },
+          {
+            "filename": "IMG_6180.jpg",
+            "order": 12
+          }
+        ],
+        "interiorFiles": [
+          {
+            "filename": "850-Open-10.jpg",
+            "order": 0
+          },
+          {
+            "filename": "850-Open-11.jpg",
+            "order": 1
+          },
+          {
+            "filename": "850-Open-13.jpg",
+            "order": 2
+          },
+          {
+            "filename": "850-Open-2.jpg",
+            "order": 3
+          },
+          {
+            "filename": "850-Open-3.jpg",
+            "order": 4
+          },
+          {
+            "filename": "850-Open-4.jpg",
+            "order": 5
+          },
+          {
+            "filename": "850-Open-5.jpg",
+            "order": 6
+          },
+          {
+            "filename": "850-Open-6.jpg",
+            "order": 7
+          },
+          {
+            "filename": "850-Open-7.jpg",
+            "order": 8
+          },
+          {
+            "filename": "850-Open-8.jpg",
+            "order": 9
+          },
+          {
+            "filename": "G0010233.jpg",
+            "order": 10
+          },
+          {
+            "filename": "GOPR0229.jpg",
+            "order": 11
+          },
+          {
+            "filename": "GOPR0234.jpg",
+            "order": 12
+          },
+          {
+            "filename": "GOPR0236.jpg",
+            "order": 13
+          },
+          {
+            "filename": "GOPR0237.jpg",
+            "order": 14
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Infinity",
+    "description": "The Infinity series - premium rigid boats",
+    "image": null,
+    "heroImage": null,
+    "mainGroup": "boats",
+    "order": 6,
+    "models": [
+      {
+        "id": 13,
+        "name": "Infinity 280",
+        "description": "Infinity 280 model - premium rigid boat",
+        "shortDescription": "Infinity 280",
+        "imageFile": "1.jpg",
+        "heroImageFile": "1.jpg",
+        "contentImageFile": "11.jpg",
+        "interiorMainImage": null,
+        "section2Title": "",
+        "section2Description": "",
+        "categoryName": "Infinity",
+        "specs": [
+          {
+            "key": "length",
+            "value": "8.5 m"
+          },
+          {
+            "key": "beam",
+            "value": "2.7 m"
+          },
+          {
+            "key": "draft",
+            "value": "0.9 m"
+          },
+          {
+            "key": "engine",
+            "value": "Outboard 300HP"
+          },
+          {
+            "key": "fuelCapacity",
+            "value": "200L"
+          },
+          {
+            "key": "waterCapacity",
+            "value": "50L"
+          },
+          {
+            "key": "maxSpeed",
+            "value": "50 knots"
+          },
+          {
+            "key": "cruisingSpeed",
+            "value": "35 knots"
+          },
+          {
+            "key": "capacity",
+            "value": "8 passengers"
+          }
+        ],
+        "features": [
+          {
+            "feature": "Rigid hull construction",
+            "order": 0
+          },
+          {
+            "feature": "Premium materials",
+            "order": 1
+          },
+          {
+            "feature": "Advanced navigation",
+            "order": 2
+          },
+          {
+            "feature": "Comfortable seating",
+            "order": 3
+          },
+          {
+            "feature": "Safety equipment",
+            "order": 4
+          },
+          {
+            "feature": "Storage compartments",
+            "order": 5
+          }
+        ],
+        "optionalFeatures": [],
+        "galleryImages": [
+          {
+            "filename": "1.jpg",
+            "order": 0
+          },
+          {
+            "filename": "11.jpg",
+            "order": 1
+          },
+          {
+            "filename": "13.jpg",
+            "order": 2
+          },
+          {
+            "filename": "14.jpg",
+            "order": 3
+          },
+          {
+            "filename": "2.jpg",
+            "order": 4
+          },
+          {
+            "filename": "3.jpg",
+            "order": 5
+          },
+          {
+            "filename": "6.jpg",
+            "order": 6
+          },
+          {
+            "filename": "Infinity 280-1.jpg",
+            "order": 7
+          },
+          {
+            "filename": "Infinity 280-2.jpg",
+            "order": 8
+          },
+          {
+            "filename": "Infinity 280-3.jpg",
+            "order": 9
+          },
+          {
+            "filename": "Infinity 280-4.jpg",
+            "order": 10
+          },
+          {
+            "filename": "Infinity 280-5.jpg",
+            "order": 11
+          }
+        ],
+        "interiorFiles": []
+      }
+    ]
+  }
+]
