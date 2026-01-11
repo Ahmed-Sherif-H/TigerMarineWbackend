@@ -214,15 +214,17 @@ class ModelsService {
       await prisma.videoFile.deleteMany({ where: { modelId: parseInt(id) } });
       await prisma.interiorFile.deleteMany({ where: { modelId: parseInt(id) } });
 
-      // Log what we're receiving for debugging
-      console.log(`[ModelsService] Updating model ID: ${id}`);
-      console.log(`  Received imageFile: ${imageFile || 'undefined'}`);
-      console.log(`  Received heroImageFile: ${heroImageFile || 'undefined'}`);
-      console.log(`  Received contentImageFile: ${contentImageFile || 'undefined'}`);
-      console.log(`  Received interiorMainImage: ${interiorMainImage || 'undefined'}`);
-      console.log(`  Received galleryFiles count: ${galleryFiles?.length || 0}`);
-      console.log(`  Received interiorFiles count: ${interiorFiles?.length || 0}`);
-      console.log(`  Received videoFiles count: ${videoFiles?.length || 0}`);
+      // Debug logging only in development
+      const isDev = process.env.NODE_ENV !== 'production';
+      if (isDev) {
+        console.log(`[ModelsService] Updating model ID: ${id}`);
+      }
+      if (isDev) {
+        console.log(`[ModelsService] Updating model ${id}:`);
+        console.log(`  Received galleryFiles count: ${galleryFiles?.length || 0}`);
+        console.log(`  Received interiorFiles count: ${interiorFiles?.length || 0}`);
+        console.log(`  Received videoFiles count: ${videoFiles?.length || 0}`);
+      }
       
       // Extract filenames before saving
       const cleanImageFile = imageFile !== undefined ? this.extractFilename(imageFile) : undefined;
@@ -240,12 +242,10 @@ class ModelsService {
         }
       }
       
-      console.log(`  Cleaned imageFile: ${cleanImageFile || 'undefined'}`);
-      console.log(`  Cleaned heroImageFile: ${cleanHeroImageFile || 'undefined'}`);
-      console.log(`  Cleaned contentImageFile: ${cleanContentImageFile || 'undefined'}`);
-      console.log(`  Cleaned interiorMainImage: ${cleanInteriorMainImage || 'undefined'}`);
-      console.log(`  Original interiorMainImage: ${interiorMainImage || 'undefined'}`);
-      console.log(`  interiorMainImage type: ${typeof interiorMainImage}`);
+      // Debug logging only in development
+      if (isDev) {
+        console.log(`  Cleaned interiorMainImage: ${cleanInteriorMainImage || 'undefined'}`);
+      }
       
       // Update model and recreate related data
       const model = await prisma.model.update({
@@ -338,16 +338,10 @@ class ModelsService {
         }
       });
       
-      console.log(`[ModelsService] Model updated. Verifying saved data:`);
-      console.log(`  Saved imageFile: ${updatedModel.imageFile || 'NULL/EMPTY'}`);
-      console.log(`  Saved interiorMainImage: ${updatedModel.interiorMainImage || 'NULL/EMPTY'}`);
-      console.log(`  Saved interiorMainImage type: ${typeof updatedModel.interiorMainImage}`);
-      console.log(`  Saved galleryImages count: ${updatedModel.galleryImages?.length || 0}`);
-      console.log(`  Saved interiorFiles count: ${updatedModel.interiorFiles?.length || 0}`);
-      
-      // Debug: Check if interiorMainImage was actually included in the update
-      console.log(`[ModelsService] Debug - cleanInteriorMainImage was: ${cleanInteriorMainImage || 'undefined'}`);
-      console.log(`[ModelsService] Debug - cleanInteriorMainImage !== undefined: ${cleanInteriorMainImage !== undefined}`);
+      // Debug logging only in development
+      if (isDev) {
+        console.log(`[ModelsService] Model updated. Interior files count: ${updatedModel.interiorFiles?.length || 0}`);
+      }
       
       return this.transformModel(updatedModel);
     } catch (error) {
@@ -468,16 +462,15 @@ class ModelsService {
   // Transform database model to frontend format
   transformModel(model) {
     const modelName = model.name;
+    const isDev = process.env.NODE_ENV !== 'production';
     
-    // Log what's in the database for debugging
-    console.log(`[ModelsService] Transforming model: ${modelName}`);
-    console.log(`  DB imageFile: ${model.imageFile || 'null'}`);
-    console.log(`  DB heroImageFile: ${model.heroImageFile || 'null'}`);
-    console.log(`  DB contentImageFile: ${model.contentImageFile || 'null'}`);
-    console.log(`  DB interiorMainImage: ${model.interiorMainImage || 'null'}`);
-    console.log(`  DB galleryImages count: ${model.galleryImages?.length || 0}`);
-    console.log(`  DB interiorFiles count: ${model.interiorFiles?.length || 0}`);
-    console.log(`  DB videoFiles count: ${model.videoFiles?.length || 0}`);
+    // Log what's in the database for debugging (only in development)
+    if (isDev) {
+      console.log(`[ModelsService] Transforming model: ${modelName}`);
+      console.log(`  DB galleryImages count: ${model.galleryImages?.length || 0}`);
+      console.log(`  DB interiorFiles count: ${model.interiorFiles?.length || 0}`);
+      console.log(`  DB videoFiles count: ${model.videoFiles?.length || 0}`);
+    }
     
     const transformed = {
       id: model.id,
@@ -513,26 +506,22 @@ class ModelsService {
       videoFiles: model.videoFiles?.map(vid => {
         // If it's a YouTube URL or video ID, return it as-is (frontend will handle embed conversion)
         if (this.isYouTubeUrl(vid.filename)) {
-          console.log(`  Video (YouTube): ${vid.filename} -> preserved as-is`);
           return vid.filename; // Return original URL/ID, let frontend convert to embed
         }
         // Otherwise, build the image path for local videos
-        const path = this.buildImagePath(modelName, vid.filename);
-        console.log(`  Video: ${vid.filename} -> ${path}`);
-        return path;
+        return this.buildImagePath(modelName, vid.filename);
       }).filter(Boolean) || [],
       interiorFiles: model.interiorFiles?.map(int => {
-        const path = this.buildImagePath(modelName, int.filename);
-        console.log(`  Interior: ${int.filename} -> ${path}`);
-        return path;
+        return this.buildImagePath(modelName, int.filename);
       }).filter(Boolean) || []
     };
     
-    console.log(`[ModelsService] Transformed model ${modelName}:`);
-    console.log(`  imageFile: ${transformed.imageFile}`);
-    console.log(`  interiorMainImage: ${transformed.interiorMainImage || 'null'}`);
-    console.log(`  galleryFiles count: ${transformed.galleryFiles.length}`);
-    console.log(`  interiorFiles count: ${transformed.interiorFiles.length}`);
+    // Only log in development
+    if (isDev) {
+      console.log(`[ModelsService] Transformed model ${modelName}:`);
+      console.log(`  galleryFiles count: ${transformed.galleryFiles.length}`);
+      console.log(`  interiorFiles count: ${transformed.interiorFiles.length}`);
+    }
     
     return transformed;
   }

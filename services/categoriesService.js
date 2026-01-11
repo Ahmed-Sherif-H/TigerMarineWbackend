@@ -1,16 +1,52 @@
 const { prisma } = require('../config/database');
 
 class CategoriesService {
-  // Get all categories with models
+  // Get all categories with models (optimized - only essential fields)
   async getAllCategories() {
     try {
       const categories = await prisma.category.findMany({
-        include: {
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          image: true,
+          heroImage: true,
+          mainGroup: true,
+          order: true,
           models: {
-            include: {
-              specs: true,
-              features: true,
-              optionalFeatures: true
+            select: {
+              id: true,
+              name: true,
+              description: true,
+              shortDescription: true,
+              imageFile: true,
+              heroImageFile: true,
+              contentImageFile: true,
+              categoryId: true,
+              specs: {
+                select: {
+                  key: true,
+                  value: true
+                },
+                orderBy: { key: 'asc' }
+              },
+              features: {
+                select: {
+                  feature: true,
+                  order: true
+                },
+                orderBy: { order: 'asc' }
+              },
+              optionalFeatures: {
+                select: {
+                  name: true,
+                  description: true,
+                  category: true,
+                  price: true,
+                  order: true
+                },
+                orderBy: { order: 'asc' }
+              }
             },
             orderBy: {
               name: 'asc'

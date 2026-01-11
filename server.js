@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const compression = require('compression');
 const path = require('path');
 const fs = require('fs-extra');
 const { connectDB } = require('./config/database');
@@ -11,8 +12,10 @@ const PORT = process.env.PORT || 3001;
 app.set('trust proxy', 1);
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Enable compression for all responses
+app.use(compression());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
@@ -181,11 +184,15 @@ const ensureDirectories = async () => {
 // Start server
 (async () => {
   try {
-    // Debug: Check environment variables
-    console.log('🔍 Environment variables check:');
-    console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
-    console.log('DATABASE_URL length:', process.env.DATABASE_URL?.length || 0);
-    console.log('All DB-related vars:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('DB')));
+    const isDev = process.env.NODE_ENV !== 'production';
+    
+    // Debug: Check environment variables (only in development)
+    if (isDev) {
+      console.log('🔍 Environment variables check:');
+      console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+      console.log('DATABASE_URL length:', process.env.DATABASE_URL?.length || 0);
+      console.log('All DB-related vars:', Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('DB')));
+    }
     
     if (!process.env.DATABASE_URL) {
       console.error('❌ DATABASE_URL is not set!');
