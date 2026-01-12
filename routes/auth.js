@@ -11,6 +11,7 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+    const isDev = process.env.NODE_ENV !== 'production';
 
     // Validate input
     if (!email || !password) {
@@ -26,6 +27,9 @@ router.post('/login', async (req, res) => {
     });
 
     if (!admin) {
+      if (isDev) {
+        console.log(`❌ Admin not found for email: ${email.toLowerCase().trim()}`);
+      }
       // Don't reveal if email exists or not (security best practice)
       return res.status(401).json({
         success: false,
@@ -37,6 +41,9 @@ router.post('/login', async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, admin.password);
 
     if (!isValidPassword) {
+      if (isDev) {
+        console.log(`❌ Invalid password for admin: ${admin.email}`);
+      }
       return res.status(401).json({
         success: false,
         error: 'Invalid email or password'

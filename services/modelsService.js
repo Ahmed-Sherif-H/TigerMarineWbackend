@@ -436,6 +436,11 @@ class ModelsService {
       return videoId || trimmed; // Return extracted video ID, or original if extraction fails
     }
     
+    // If it's a Cloudinary URL (http:// or https://), return it as-is
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return trimmed; // Store Cloudinary URL directly
+    }
+    
     // If it's already just a filename, return it
     if (!trimmed.includes('/')) {
       return trimmed;
@@ -444,17 +449,32 @@ class ModelsService {
     return trimmed.split('/').pop().trim();
   }
 
-  // Helper function to build full image path
-  buildImagePath(modelName, filename) {
+  // Helper function to build image URL
+  // Now handles both Cloudinary URLs (stored directly) and legacy filenames
+  buildImagePath(modelName, filename, isInterior = false) {
     if (!filename || filename.trim() === '') {
       return null;
     }
+
+    const trimmed = filename.trim();
+
+    // Check if it's already a Cloudinary URL (starts with http:// or https://)
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return trimmed; // Return Cloudinary URL as-is
+    }
+
+    // Legacy: Build local path from filename
     // First, extract just the filename (in case a full path was passed)
-    const cleanFilename = this.extractFilename(filename);
+    const cleanFilename = this.extractFilename(trimmed);
     if (!cleanFilename) return null;
     
     // Get the correct folder name (maps abbreviated names to full folder names)
     const folderName = this.getModelFolderName(modelName);
+    
+    // Build path with optional Interior subfolder
+    if (isInterior) {
+      return `/images/${folderName}/Interior/${cleanFilename}`;
+    }
     // Construct path: /images/{folderName}/{filename}
     return `/images/${folderName}/${cleanFilename}`;
   }
@@ -483,7 +503,7 @@ class ModelsService {
       imageFile: this.buildImagePath(modelName, model.imageFile),
       heroImageFile: this.buildImagePath(modelName, model.heroImageFile),
       contentImageFile: this.buildImagePath(modelName, model.contentImageFile),
-      interiorMainImage: model.interiorMainImage ? model.interiorMainImage : null,
+      interiorMainImage: model.interiorMainImage ? this.buildImagePath(modelName, model.interiorMainImage, true) : null,
       section2Title: model.section2Title,
       section2Description: model.section2Description,
       specs: model.specs?.reduce((acc, spec) => {
