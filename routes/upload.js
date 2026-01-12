@@ -91,7 +91,10 @@ router.post('/single', authenticate, upload.single('file'), async (req, res) => 
     let cloudinaryFolder;
 
     // Determine Cloudinary folder based on upload type
-    if (folder === 'customizer') {
+    if (folder === 'events') {
+      // Event images
+      cloudinaryFolder = cloudinaryService.getEventsFolder();
+    } else if (folder === 'customizer') {
       if (!modelName || !partName) {
         return res.status(400).json({
           success: false,
@@ -119,7 +122,7 @@ router.post('/single', authenticate, upload.single('file'), async (req, res) => 
     } else {
       return res.status(400).json({
         success: false,
-        error: `Unknown folder type: ${folder}`
+        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
       });
     }
 
@@ -186,7 +189,10 @@ router.post('/multiple', authenticate, upload.array('files', 20), async (req, re
     let cloudinaryFolder;
 
     // Determine Cloudinary folder
-    if (folder === 'customizer') {
+    if (folder === 'events') {
+      // Event images
+      cloudinaryFolder = cloudinaryService.getEventsFolder();
+    } else if (folder === 'customizer') {
       if (!modelName || !partName) {
         return res.status(400).json({
           success: false,
@@ -214,7 +220,7 @@ router.post('/multiple', authenticate, upload.array('files', 20), async (req, re
     } else {
       return res.status(400).json({
         success: false,
-        error: `Unknown folder type: ${folder}`
+        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
       });
     }
 
@@ -263,38 +269,77 @@ router.post('/multiple', authenticate, upload.array('files', 20), async (req, re
   }
 });
 
-// Get list of files in a folder (admin only)
-router.get('/list', authenticate, (req, res) => {
+// Get list of files in a folder (admin only) - Now lists from Cloudinary
+router.get('/list', authenticate, async (req, res) => {
+  const isDev = process.env.NODE_ENV !== 'production';
   try {
-    const { folder, modelName, partName } = req.query;
+    const { folder, modelName, categoryName, partName, subfolder } = req.query;
     
-    let folderPath;
-    if (folder === 'customizer') {
-      folderPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);
+    // Check Cloudinary configuration
+    if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+      return res.status(500).json({
+        success: false,
+        error: 'Cloudinary is not configured. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables.'
+      });
+    }
+
+    let cloudinaryFolder;
+
+    // Determine Cloudinary folder
+    if (folder === 'events') {
+      cloudinaryFolder = cloudinaryService.getEventsFolder();
+    } else if (folder === 'customizer') {
+      if (!modelName || !partName) {
+        return res.status(400).json({
+          success: false,
+          error: 'modelName and partName are required for customizer uploads'
+        });
+      }
+      cloudinaryFolder = cloudinaryService.getCustomizerFolder(modelName, partName);
+    } else if (folder === 'categories') {
+      if (!categoryName) {
+        return res.status(400).json({
+          success: false,
+          error: 'categoryName is required for category uploads'
+        });
+      }
+      cloudinaryFolder = cloudinaryService.getCategoryFolder(categoryName);
+    } else if (folder === 'images') {
+      if (!modelName || modelName.trim() === '') {
+        return res.status(400).json({
+          success: false,
+          error: 'modelName is required for image uploads'
+        });
+      }
+      const imageType = subfolder === 'Interior' ? 'interior' : 'main';
+      cloudinaryFolder = cloudinaryService.getModelFolder(modelName, imageType);
     } else {
-      folderPath = path.join(__dirname, '../public/images', modelName);
+      return res.status(400).json({
+        success: false,
+        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
+      });
     }
+
+    // List resources from Cloudinary
+    const resources = await cloudinaryService.listResources(cloudinaryFolder);
+    const files = resources.map(resource => ({
+      filename: resource.original_filename + '.' + resource.format,
+      url: resource.secure_url,
+      public_id: resource.public_id,
+      size: resource.bytes,
+      format: resource.format,
+      width: resource.width,
+      height: resource.height
+    }));
     
-    if (!fs.existsSync(folderPath)) {
-      return res.json({ files: [] });
-    }
-    
-    const files = fs.readdirSync(folderPath)
-      .filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.mov', '.avi'].includes(ext);
-      })
-      .map(file => ({
-        filename: file,
-        path: folder === 'customizer' 
-          ? `/Customizer-images/${modelName}/${partName}/${file}`
-          : `/images/${modelName}/${file}`
-      }));
-    
-    res.json({ files });
+    res.json({ success: true, files });
   } catch (error) {
-    console.error('List files error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Cloudinary list files error:', error);
+    res.status(500).json({ 
+      success: false,
+      error: error.message || 'Failed to list files from Cloudinary',
+      details: isDev ? error.stack : undefined
+    });
   }
 });
 

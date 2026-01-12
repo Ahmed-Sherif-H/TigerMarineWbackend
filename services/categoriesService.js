@@ -96,9 +96,44 @@ class CategoriesService {
   // Create category
   async createCategory(categoryData) {
     try {
+      const isDev = process.env.NODE_ENV !== 'production';
+      
+      // Log what we're receiving (for debugging)
+      if (isDev) {
+        console.log('📝 Creating category:', categoryData.name);
+        if (categoryData.image !== undefined) {
+          console.log('  Image:', categoryData.image);
+          console.log('  Is Cloudinary URL:', categoryData.image?.startsWith('http://') || categoryData.image?.startsWith('https://'));
+        }
+        if (categoryData.heroImage !== undefined) {
+          console.log('  HeroImage:', categoryData.heroImage);
+          console.log('  Is Cloudinary URL:', categoryData.heroImage?.startsWith('http://') || categoryData.heroImage?.startsWith('https://'));
+        }
+      }
+
+      // Ensure Cloudinary URLs are stored as-is (no processing)
+      const createData = { ...categoryData };
+      
+      // If image/heroImage are Cloudinary URLs, store them directly
+      if (createData.image && (createData.image.startsWith('http://') || createData.image.startsWith('https://'))) {
+        // Store full Cloudinary URL as-is
+        createData.image = createData.image;
+      }
+      
+      if (createData.heroImage && (createData.heroImage.startsWith('http://') || createData.heroImage.startsWith('https://'))) {
+        // Store full Cloudinary URL as-is
+        createData.heroImage = createData.heroImage;
+      }
+
       const category = await prisma.category.create({
-        data: categoryData
+        data: createData
       });
+
+      if (isDev) {
+        console.log('✅ Category created successfully');
+        console.log('  Stored image:', category.image);
+        console.log('  Stored heroImage:', category.heroImage);
+      }
 
       return category;
     } catch (error) {
@@ -109,10 +144,45 @@ class CategoriesService {
   // Update category
   async updateCategory(id, categoryData) {
     try {
+      const isDev = process.env.NODE_ENV !== 'production';
+      
+      // Log what we're receiving (for debugging)
+      if (isDev) {
+        console.log('📝 Updating category:', id);
+        if (categoryData.image !== undefined) {
+          console.log('  Image:', categoryData.image);
+          console.log('  Is Cloudinary URL:', categoryData.image?.startsWith('http://') || categoryData.image?.startsWith('https://'));
+        }
+        if (categoryData.heroImage !== undefined) {
+          console.log('  HeroImage:', categoryData.heroImage);
+          console.log('  Is Cloudinary URL:', categoryData.heroImage?.startsWith('http://') || categoryData.heroImage?.startsWith('https://'));
+        }
+      }
+
+      // Ensure Cloudinary URLs are stored as-is (no processing)
+      const updateData = { ...categoryData };
+      
+      // If image/heroImage are Cloudinary URLs, store them directly
+      if (updateData.image && (updateData.image.startsWith('http://') || updateData.image.startsWith('https://'))) {
+        // Store full Cloudinary URL as-is
+        updateData.image = updateData.image;
+      }
+      
+      if (updateData.heroImage && (updateData.heroImage.startsWith('http://') || updateData.heroImage.startsWith('https://'))) {
+        // Store full Cloudinary URL as-is
+        updateData.heroImage = updateData.heroImage;
+      }
+
       const category = await prisma.category.update({
         where: { id: parseInt(id) },
-        data: categoryData
+        data: updateData
       });
+
+      if (isDev) {
+        console.log('✅ Category updated successfully');
+        console.log('  Stored image:', category.image);
+        console.log('  Stored heroImage:', category.heroImage);
+      }
 
       return category;
     } catch (error) {

@@ -212,6 +212,14 @@ class CloudinaryService {
   getCustomizerFolder(modelName, partName) {
     return `customizer/${modelName}/${partName}`;
   }
+
+  /**
+   * Build folder path for event images
+   * @returns {string} Cloudinary folder path
+   */
+  getEventsFolder() {
+    return 'events';
+  }
 }
 
 module.exports = new CloudinaryService();

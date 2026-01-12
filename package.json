@@ -20,7 +20,8 @@
     "remove:striker": "node scripts/removeStrikerData.js",
     "add:interior-column": "node scripts/addInteriorMainImageColumn.js",
     "test:db": "node scripts/checkConnection.js",
-    "check:db": "node scripts/checkDatabase.js"
+    "check:db": "node scripts/checkDatabase.js",
+    "list:cloudinary": "node scripts/listCloudinaryImages.js"
   },
   "keywords": [
     "tiger-marine",

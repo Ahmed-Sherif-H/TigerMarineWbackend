@@ -226,7 +226,7 @@ class ModelsService {
         console.log(`  Received videoFiles count: ${videoFiles?.length || 0}`);
       }
       
-      // Extract filenames before saving
+      // Extract filenames before saving (extractFilename handles Cloudinary URLs correctly)
       const cleanImageFile = imageFile !== undefined ? this.extractFilename(imageFile) : undefined;
       const cleanHeroImageFile = heroImageFile !== undefined ? this.extractFilename(heroImageFile) : undefined;
       const cleanContentImageFile = contentImageFile !== undefined ? this.extractFilename(contentImageFile) : undefined;
@@ -244,7 +244,13 @@ class ModelsService {
       
       // Debug logging only in development
       if (isDev) {
-        console.log(`  Cleaned interiorMainImage: ${cleanInteriorMainImage || 'undefined'}`);
+        console.log(`[ModelsService] Image processing:`);
+        console.log(`  imageFile: ${imageFile} → ${cleanImageFile}`);
+        console.log(`  heroImageFile: ${heroImageFile} → ${cleanHeroImageFile}`);
+        console.log(`  contentImageFile: ${contentImageFile} → ${cleanContentImageFile}`);
+        console.log(`  interiorMainImage: ${interiorMainImage} → ${cleanInteriorMainImage || 'undefined'}`);
+        console.log(`  Is Cloudinary URL (imageFile): ${cleanImageFile?.startsWith('http://') || cleanImageFile?.startsWith('https://')}`);
+        console.log(`  Is Cloudinary URL (heroImageFile): ${cleanHeroImageFile?.startsWith('http://') || cleanHeroImageFile?.startsWith('https://')}`);
       }
       
       // Update model and recreate related data
