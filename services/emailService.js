@@ -34,10 +34,12 @@ const createTransporter = () => {
   }
   
   // Use explicit SMTP configuration for better reliability
-  return nodemailer.createTransport({
+  // Try port 465 (SSL) first, fallback to 587 (TLS) if needed
+  // Railway may block port 587, so we try 465 which is more commonly allowed
+  const smtpConfig = {
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    port: 465, // SSL port - more likely to work on Railway
+    secure: true, // true for 465, false for other ports
     auth: {
       user: emailUser,
       pass: emailPass,
@@ -46,14 +48,24 @@ const createTransporter = () => {
       // Do not fail on invalid certs
       rejectUnauthorized: false
     },
-    connectionTimeout: 10000, // 10 seconds
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
+    connectionTimeout: 15000, // 15 seconds (increased)
+    greetingTimeout: 15000,
+    socketTimeout: 15000,
     // Retry configuration
-    pool: true,
-    maxConnections: 1,
-    maxMessages: 3,
-  });
+    pool: false, // Disable pooling for better reliability
+    // Additional options for Railway
+    requireTLS: false, // Port 465 uses SSL, not TLS
+    debug: process.env.NODE_ENV !== 'production', // Enable debug in dev
+  };
+
+  if (isDev) {
+    console.log('📧 SMTP Configuration:');
+    console.log('   Host: smtp.gmail.com');
+    console.log('   Port: 465 (SSL)');
+    console.log('   Secure: true');
+  }
+
+  return nodemailer.createTransport(smtpConfig);
 };
 
 // Send contact form email
@@ -93,11 +105,18 @@ const sendContactEmail = async (contactData) => {
   };
 
   try {
-    // Verify connection first
+    // Try to verify connection (with timeout)
     if (isDev) {
       console.log('🔍 Verifying SMTP connection...');
     }
-    await transporter.verify();
+    
+    // Set a timeout for verification
+    const verifyPromise = transporter.verify();
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Connection verification timeout')), 10000)
+    );
+    
+    await Promise.race([verifyPromise, timeoutPromise]);
     
     if (isDev) {
       console.log('✅ SMTP connection verified');
@@ -115,22 +134,31 @@ const sendContactEmail = async (contactData) => {
     console.error('❌ Email send error:', error);
     
     // More detailed error logging
-    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
-      console.error('   Connection timeout/refused. Check:');
-      console.error('   1. Gmail App Password is correct');
-      console.error('   2. 2-Step Verification is enabled');
-      console.error('   3. Network/firewall allows SMTP connections');
-      console.error('   4. Railway allows outbound SMTP (port 587)');
+    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
+      console.error('   ⚠️  Connection timeout/refused. Possible causes:');
+      console.error('   1. Railway may be blocking outbound SMTP connections');
+      console.error('   2. Gmail App Password is incorrect');
+      console.error('   3. 2-Step Verification not enabled');
+      console.error('   4. Network/firewall blocking SMTP');
+      console.error('');
+      console.error('   💡 Solutions:');
+      console.error('   - Try using SendGrid or Mailgun (more reliable for cloud platforms)');
+      console.error('   - Contact Railway support to whitelist SMTP ports');
+      console.error('   - Use a different email service provider');
     } else if (error.code === 'EAUTH') {
       console.error('   Authentication failed. Check:');
       console.error('   1. EMAIL_USER is correct');
-      console.error('   2. EMAIL_PASSWORD is a valid App Password (not regular password)');
+      console.error('   2. EMAIL_PASSWORD is a valid App Password (16 chars, no spaces)');
     }
     
     throw new Error('Failed to send email: ' + error.message);
   } finally {
     // Close the transporter connection
-    transporter.close();
+    try {
+      transporter.close();
+    } catch (closeError) {
+      // Ignore close errors
+    }
   }
 };
 
@@ -202,11 +230,18 @@ const sendCustomizerInquiry = async (inquiryData) => {
   };
 
   try {
-    // Verify connection first
+    // Try to verify connection (with timeout)
     if (isDev) {
       console.log('🔍 Verifying SMTP connection...');
     }
-    await transporter.verify();
+    
+    // Set a timeout for verification
+    const verifyPromise = transporter.verify();
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Connection verification timeout')), 10000)
+    );
+    
+    await Promise.race([verifyPromise, timeoutPromise]);
     
     if (isDev) {
       console.log('✅ SMTP connection verified');
@@ -224,22 +259,31 @@ const sendCustomizerInquiry = async (inquiryData) => {
     console.error('❌ Email send error:', error);
     
     // More detailed error logging
-    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
-      console.error('   Connection timeout/refused. Check:');
-      console.error('   1. Gmail App Password is correct');
-      console.error('   2. 2-Step Verification is enabled');
-      console.error('   3. Network/firewall allows SMTP connections');
-      console.error('   4. Railway allows outbound SMTP (port 587)');
+    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
+      console.error('   ⚠️  Connection timeout/refused. Possible causes:');
+      console.error('   1. Railway may be blocking outbound SMTP connections');
+      console.error('   2. Gmail App Password is incorrect');
+      console.error('   3. 2-Step Verification not enabled');
+      console.error('   4. Network/firewall blocking SMTP');
+      console.error('');
+      console.error('   💡 Solutions:');
+      console.error('   - Try using SendGrid or Mailgun (more reliable for cloud platforms)');
+      console.error('   - Contact Railway support to whitelist SMTP ports');
+      console.error('   - Use a different email service provider');
     } else if (error.code === 'EAUTH') {
       console.error('   Authentication failed. Check:');
       console.error('   1. EMAIL_USER is correct');
-      console.error('   2. EMAIL_PASSWORD is a valid App Password (not regular password)');
+      console.error('   2. EMAIL_PASSWORD is a valid App Password (16 chars, no spaces)');
     }
     
     throw new Error('Failed to send email: ' + error.message);
   } finally {
     // Close the transporter connection
-    transporter.close();
+    try {
+      transporter.close();
+    } catch (closeError) {
+      // Ignore close errors
+    }
   }
 };
 
