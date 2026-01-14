@@ -62,6 +62,10 @@ class ModelsController {
   async updateModel(req, res) {
     try {
       const { id } = req.params;
+      console.log(`[ModelsController] Update request for model ID: ${id}`);
+      console.log(`[ModelsController] Request body keys:`, Object.keys(req.body || {}));
+      console.log(`[ModelsController] Request body.interiorMainImage:`, req.body?.interiorMainImage);
+      console.log(`[ModelsController] Request body.interiorMainImage type:`, typeof req.body?.interiorMainImage);
       const model = await modelsService.updateModel(id, req.body);
       res.json({
         success: true,

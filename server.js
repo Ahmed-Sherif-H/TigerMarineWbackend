@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
+  'https://tigermarine.com',
+  'https://www.tigermarine.com',
   'https://tigermarineweb.netlify.app',
   'http://localhost:5173',
   'http://localhost:3000',
