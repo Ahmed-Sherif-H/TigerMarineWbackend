@@ -2,10 +2,32 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs-extra');
-const { authenticate } = require('../middleware/auth');
-const cloudinaryService = require('../services/cloudinaryService');
+const { modelsService } = require('../services/modelsService');
 
 const router = express.Router();
+
+// Helper to get model folder name (maps SL480 -> SportLine480, etc.)
+function getModelFolderName(modelName) {
+  if (!modelName) return modelName;
+  // Use the same mapping as modelsService
+  const folderMap = {
+    'ML38': 'MaxLine 38',
+    'TL950': 'TopLine950',
+    'TL850': 'TopLine850',
+    'TL750': 'TopLine750',
+    'TL650': 'TopLine650',
+    'PL620': 'ProLine620',
+    'PL550': 'ProLine550',
+    'SL520': 'SportLine520',
+    'SL480': 'SportLine480',
+    'OP850': 'Open850',
+    'OP750': 'Open750',
+    'OP650': 'Open650',
+    'Infinity 280': 'Infinity 280',
+    'Striker 330': 'Striker 330'
+  };
+  return folderMap[modelName] || modelName;
+}
 
 // Error handler for multer
 const handleMulterError = (err, req, res, next) => {
@@ -31,19 +53,103 @@ const handleMulterError = (err, req, res, next) => {
   next();
 };
 
-// Configure multer to store files in memory (for Cloudinary upload)
-const storage = multer.memoryStorage();
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: async (req, file, cb) => {
+    try {
+      console.log('📁 Determining upload destination...');
+      console.log('  File:', file.originalname);
+      
+      // Get fields from req.body (multer parses them)
+      // Note: In multipart/form-data, multer should parse fields before calling destination
+      // But sometimes fields aren't available yet, so we check req.body
+      const body = req.body || {};
+      
+      console.log('  Body keys:', Object.keys(body));
+      console.log('  Body values:', Object.entries(body).map(([k, v]) => [k, typeof v === 'string' && v.length > 100 ? v.substring(0, 100) + '...' : v]));
+      
+      const folder = body.folder;
+      const modelName = body.modelName;
+      const categoryName = body.categoryName;
+      
+      console.log('  Extracted from body:', { 
+        folder: folder || 'MISSING', 
+        modelName: modelName || 'MISSING', 
+        categoryName: categoryName || 'MISSING' 
+      });
+      console.log('  All body keys:', Object.keys(body));
+      console.log('  Body values:', Object.entries(body).map(([k, v]) => [k, typeof v === 'string' && v.length > 50 ? v.substring(0, 50) + '...' : v]));
+      
+      if (!folder) {
+        console.error('❌ Folder is missing from request body');
+        console.error('  Body is:', body);
+        console.error('  Body type:', typeof body);
+        console.error('  Body keys:', Object.keys(body));
+        return cb(new Error('Folder is required. Make sure "folder" field is included in FormData and sent before the file.'));
+      }
+      
+      let uploadPath;
+      
+      if (folder === 'customizer') {
+        // Customizer images: public/Customizer-images/[ModelName]/[PartName]/
+        const { partName } = req.body;
+        if (!modelName || !partName) {
+          return cb(new Error('modelName and partName are required for customizer uploads'));
+        }
+        uploadPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);
+      } else if (folder === 'categories') {
+        // Category images: public/images/categories/[CategoryName]/
+        if (!categoryName) {
+          return cb(new Error('categoryName is required for category uploads'));
+        }
+        uploadPath = path.join(__dirname, '../public/images/categories', categoryName);
+      } else if (folder === 'images') {
+        // Regular images: public/images/[ModelName]/
+        if (!modelName || modelName.trim() === '') {
+          console.error('❌ modelName is missing or empty');
+          return cb(new Error('modelName is required for image uploads'));
+        }
+        // Map model name to folder name (e.g., SL480 -> SportLine480)
+        const folderName = getModelFolderName(String(modelName).trim());
+        console.log(`  Model name mapping: ${modelName} -> ${folderName}`);
+        const basePath = path.join(__dirname, '../public/images', folderName);
+        const { subfolder } = req.body;
+        if (subfolder === 'Interior') {
+          // Interior images: public/images/[ModelFolderName]/Interior/
+          uploadPath = path.join(basePath, 'Interior');
+        } else {
+          uploadPath = basePath;
+        }
+      } else {
+        console.error('❌ Unknown folder type:', folder);
+        return cb(new Error(`Unknown folder type: ${folder}`));
+      }
+      
+      console.log('  Upload path:', uploadPath);
+      
+      // Create directory if it doesn't exist
+      await fs.ensureDir(uploadPath);
+      cb(null, uploadPath);
+    } catch (error) {
+      console.error('❌ Error determining destination:', error);
+      cb(error);
+    }
+  },
+  filename: (req, file, cb) => {
+    // Keep original filename
+    cb(null, file.originalname);
+  }
+});
 
 const upload = multer({
-  storage: storage, // Memory storage for Cloudinary
+  storage: storage,
   limits: {
     fileSize: 50 * 1024 * 1024 // 50MB limit
   },
   fileFilter: (req, file, cb) => {
-    const isDev = process.env.NODE_ENV !== 'production';
-    if (isDev) {
-      console.log('🔍 File filter called for:', file.originalname);
-    }
+    // Log when fileFilter is called
+    console.log('🔍 File filter called for:', file.originalname);
+    console.log('  Body at filter time:', req.body);
     
     // Allow images and videos
     const allowedTypes = /jpeg|jpg|png|gif|webp|mp4|mov|avi/;
@@ -58,369 +164,185 @@ const upload = multer({
   }
 });
 
-// Upload single file (admin only) - Now uses Cloudinary
-router.post('/single', authenticate, upload.single('file'), async (req, res) => {
-  const isDev = process.env.NODE_ENV !== 'production';
+// Upload single file
+router.post('/single', (req, res, next) => {
+  // Log incoming request
+  console.log('📤 Upload request received');
+  console.log('  Content-Type:', req.headers['content-type']);
+  
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      console.error('❌ Multer error in upload:', err.message);
+      return handleMulterError(err, req, res, next);
+    }
+    next();
+  });
+}, (req, res) => {
+  console.log('📤 Upload handler - after multer');
+  console.log('  Body:', req.body);
+  console.log('  File:', req.file ? { name: req.file.originalname, size: req.file.size } : 'No file');
   
   try {
-    // Validate folder is present
+    // Validate folder is present (should be in req.body after multer processes it)
     const folder = req.body?.folder;
     if (!folder) {
+      console.error('❌ Folder is missing from request');
+      console.error('  Body keys:', Object.keys(req.body || {}));
+      console.error('  Body:', req.body);
       return res.status(400).json({ 
         success: false,
-        error: 'Folder is required. Make sure "folder" field is included in FormData.'
+        error: 'Folder is required. Make sure "folder" field is included in FormData.',
+        received: {
+          body: req.body,
+          bodyKeys: Object.keys(req.body || {}),
+          hasFile: !!req.file
+        }
       });
     }
     
     if (!req.file) {
+      console.error('❌ No file in request');
       return res.status(400).json({ 
         success: false,
-        error: 'No file uploaded'
+        error: 'No file uploaded',
+        received: {
+          body: req.body,
+          hasFile: !!req.file
+        }
       });
     }
-
-    // Check Cloudinary configuration
-    if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cloudinary is not configured. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables.'
-      });
-    }
-
-    const { modelName, categoryName, subfolder, partName } = req.body;
-    let cloudinaryFolder;
-
-    // Determine Cloudinary folder based on upload type
-    if (folder === 'events') {
-      // Event images
-      cloudinaryFolder = cloudinaryService.getEventsFolder();
-    } else if (folder === 'customizer') {
-      if (!modelName || !partName) {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName and partName are required for customizer uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCustomizerFolder(modelName, partName);
-    } else if (folder === 'categories') {
-      if (!categoryName) {
-        return res.status(400).json({
-          success: false,
-          error: 'categoryName is required for category uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCategoryFolder(categoryName);
-    } else if (folder === 'images') {
-      if (!modelName || modelName.trim() === '') {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName is required for image uploads'
-        });
-      }
-      const imageType = subfolder === 'Interior' ? 'interior' : 'main';
-      cloudinaryFolder = cloudinaryService.getModelFolder(modelName, imageType);
-    } else {
-      return res.status(400).json({
-        success: false,
-        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
-      });
-    }
-
-    if (isDev) {
-      console.log('📤 Uploading to Cloudinary...');
-      console.log('  Folder:', cloudinaryFolder);
-      console.log('  Filename:', req.file.originalname);
-    }
-
-    // Upload to Cloudinary
-    const result = await cloudinaryService.uploadFile(
-      req.file.buffer,
-      cloudinaryFolder,
-      req.file.originalname
-    );
-
-    if (isDev) {
-      console.log('✅ File uploaded to Cloudinary:', result.secure_url);
-    }
-
-    // Return Cloudinary URL and public_id
+    
+    // File was already saved by multer to the destination determined earlier
+    // But if destination failed, req.file.path might not be set correctly
+    // So we need to verify the file was saved
+    const filePath = req.file.path;
+    const fileName = req.file.filename;
+    
+    console.log('✅ File uploaded successfully:', fileName);
+    console.log('  Saved to:', filePath);
+    
     res.json({
       success: true,
-      message: 'File uploaded successfully to Cloudinary',
-      url: result.secure_url,
-      public_id: result.public_id,
-      filename: req.file.originalname,
-      size: req.file.size,
-      format: result.format,
-      width: result.width,
-      height: result.height
+      message: 'File uploaded successfully',
+      filename: fileName,
+      path: filePath,
+      size: req.file.size
     });
   } catch (error) {
-    console.error('❌ Cloudinary upload error:', error);
+    console.error('❌ Upload error:', error);
+    console.error('  Stack:', error.stack);
     res.status(500).json({ 
       success: false,
-      error: error.message || 'Failed to upload file to Cloudinary',
+      error: error.message,
       details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 });
 
-// Upload multiple files (admin only) - Now uses Cloudinary
-router.post('/multiple', authenticate, upload.array('files', 20), async (req, res) => {
-  const isDev = process.env.NODE_ENV !== 'production';
+// Upload multiple files
+router.post('/multiple', (req, res, next) => {
+  upload.array('files', 20)(req, res, (err) => {
+    if (err) {
+      return handleMulterError(err, req, res, next);
+    }
+    next();
+  });
+}, (req, res) => {
+  console.log('📤 Multiple upload request received');
+  console.log('  Body:', req.body);
+  console.log('  Files:', req.files ? req.files.length : 0);
   
   try {
     if (!req.files || req.files.length === 0) {
+      console.error('❌ No files in request');
       return res.status(400).json({ 
         success: false,
         error: 'No files uploaded' 
       });
     }
-
-    // Check Cloudinary configuration
-    if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cloudinary is not configured. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables.'
-      });
-    }
-
-    const { folder, modelName, categoryName, subfolder, partName } = req.body;
-    let cloudinaryFolder;
-
-    // Determine Cloudinary folder
-    if (folder === 'events') {
-      // Event images
-      cloudinaryFolder = cloudinaryService.getEventsFolder();
-    } else if (folder === 'customizer') {
-      if (!modelName || !partName) {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName and partName are required for customizer uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCustomizerFolder(modelName, partName);
-    } else if (folder === 'categories') {
-      if (!categoryName) {
-        return res.status(400).json({
-          success: false,
-          error: 'categoryName is required for category uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCategoryFolder(categoryName);
-    } else if (folder === 'images') {
-      if (!modelName) {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName is required for image uploads'
-        });
-      }
-      const imageType = subfolder === 'Interior' ? 'interior' : 'main';
-      cloudinaryFolder = cloudinaryService.getModelFolder(modelName, imageType);
-    } else {
-      return res.status(400).json({
-        success: false,
-        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
-      });
-    }
-
-    if (isDev) {
-      console.log('📤 Uploading', req.files.length, 'files to Cloudinary...');
-      console.log('  Folder:', cloudinaryFolder);
-    }
-
-    // Upload all files to Cloudinary
-    const uploadPromises = req.files.map(file => 
-      cloudinaryService.uploadFile(
-        file.buffer,
-        cloudinaryFolder,
-        file.originalname
-      )
-    );
-
-    const results = await Promise.all(uploadPromises);
-
-    const uploadedFiles = results.map((result, index) => ({
-      url: result.secure_url,
-      public_id: result.public_id,
-      filename: req.files[index].originalname,
-      size: req.files[index].size,
-      format: result.format,
-      width: result.width,
-      height: result.height
+    
+    const uploadedFiles = req.files.map(file => ({
+      filename: file.filename,
+      path: file.path,
+      size: file.size
     }));
-
-    if (isDev) {
-      console.log('✅ Files uploaded successfully:', uploadedFiles.length);
-    }
-
+    
+    console.log('✅ Files uploaded successfully:', uploadedFiles.length);
     res.json({
       success: true,
-      message: `${uploadedFiles.length} files uploaded successfully to Cloudinary`,
+      message: `${uploadedFiles.length} files uploaded successfully`,
       files: uploadedFiles
     });
   } catch (error) {
-    console.error('❌ Cloudinary upload error:', error);
+    console.error('❌ Upload error:', error);
+    console.error('  Stack:', error.stack);
     res.status(500).json({ 
       success: false,
-      error: error.message || 'Failed to upload files to Cloudinary',
+      error: error.message,
       details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 });
 
-// Get list of files in a folder (admin only) - Now lists from Cloudinary
-router.get('/list', authenticate, async (req, res) => {
-  const isDev = process.env.NODE_ENV !== 'production';
+// Get list of files in a folder
+router.get('/list', (req, res) => {
   try {
-    const { folder, modelName, categoryName, partName, subfolder } = req.query;
+    const { folder, modelName, partName } = req.query;
     
-    // Check Cloudinary configuration
-    if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cloudinary is not configured. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables.'
-      });
-    }
-
-    let cloudinaryFolder;
-
-    // Determine Cloudinary folder
-    if (folder === 'events') {
-      cloudinaryFolder = cloudinaryService.getEventsFolder();
-    } else if (folder === 'customizer') {
-      if (!modelName || !partName) {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName and partName are required for customizer uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCustomizerFolder(modelName, partName);
-    } else if (folder === 'categories') {
-      if (!categoryName) {
-        return res.status(400).json({
-          success: false,
-          error: 'categoryName is required for category uploads'
-        });
-      }
-      cloudinaryFolder = cloudinaryService.getCategoryFolder(categoryName);
-    } else if (folder === 'images') {
-      if (!modelName || modelName.trim() === '') {
-        return res.status(400).json({
-          success: false,
-          error: 'modelName is required for image uploads'
-        });
-      }
-      const imageType = subfolder === 'Interior' ? 'interior' : 'main';
-      cloudinaryFolder = cloudinaryService.getModelFolder(modelName, imageType);
+    let folderPath;
+    if (folder === 'customizer') {
+      folderPath = path.join(__dirname, '../public/Customizer-images', modelName, partName);
     } else {
-      return res.status(400).json({
-        success: false,
-        error: `Unknown folder type: ${folder}. Supported: events, customizer, categories, images`
-      });
+      folderPath = path.join(__dirname, '../public/images', modelName);
     }
-
-    // List resources from Cloudinary
-    const resources = await cloudinaryService.listResources(cloudinaryFolder);
-    const files = resources.map(resource => ({
-      filename: resource.original_filename + '.' + resource.format,
-      url: resource.secure_url,
-      public_id: resource.public_id,
-      size: resource.bytes,
-      format: resource.format,
-      width: resource.width,
-      height: resource.height
-    }));
     
-    res.json({ success: true, files });
+    if (!fs.existsSync(folderPath)) {
+      return res.json({ files: [] });
+    }
+    
+    const files = fs.readdirSync(folderPath)
+      .filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.mov', '.avi'].includes(ext);
+      })
+      .map(file => ({
+        filename: file,
+        path: folder === 'customizer' 
+          ? `/Customizer-images/${modelName}/${partName}/${file}`
+          : `/images/${modelName}/${file}`
+      }));
+    
+    res.json({ files });
   } catch (error) {
-    console.error('❌ Cloudinary list files error:', error);
-    res.status(500).json({ 
-      success: false,
-      error: error.message || 'Failed to list files from Cloudinary',
-      details: isDev ? error.stack : undefined
-    });
+    console.error('List files error:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Delete a file (admin only) - Now deletes from Cloudinary
-router.delete('/delete', authenticate, async (req, res) => {
+// Delete a file
+router.delete('/delete', (req, res) => {
   try {
-    const { url, public_id } = req.body;
+    const { filePath } = req.body;
     
-    if (!url && !public_id) {
-      return res.status(400).json({ 
-        success: false,
-        error: 'Either url or public_id is required' 
-      });
+    if (!filePath) {
+      return res.status(400).json({ error: 'File path is required' });
     }
-
-    // Check Cloudinary configuration
-    if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cloudinary is not configured'
-      });
+    
+    const fullPath = path.join(__dirname, '../public', filePath);
+    
+    if (!fs.existsSync(fullPath)) {
+      return res.status(404).json({ error: 'File not found' });
     }
-
-    let publicIdToDelete = public_id;
-
-    // If URL provided, extract public_id from it
-    if (!publicIdToDelete && url) {
-      // Check if it's a Cloudinary URL
-      if (cloudinaryService.isCloudinaryUrl(url)) {
-        publicIdToDelete = cloudinaryService.extractPublicId(url);
-      } else {
-        // Legacy: might be a local file path, try to delete from filesystem as fallback
-        try {
-          const fullPath = path.join(__dirname, '../public', url);
-          if (fs.existsSync(fullPath)) {
-            fs.unlinkSync(fullPath);
-            return res.json({
-              success: true,
-              message: 'Local file deleted successfully (legacy)'
-            });
-          }
-        } catch (fsError) {
-          // Ignore filesystem errors
-        }
-        
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid URL. Must be a Cloudinary URL or provide public_id'
-        });
-      }
-    }
-
-    if (!publicIdToDelete) {
-      return res.status(400).json({
-        success: false,
-        error: 'Could not extract public_id from URL'
-      });
-    }
-
-    // Delete from Cloudinary
-    const result = await cloudinaryService.deleteFile(publicIdToDelete);
-
-    if (result.result === 'ok' || result.result === 'not found') {
-      res.json({
-        success: true,
-        message: 'File deleted successfully from Cloudinary',
-        public_id: publicIdToDelete
-      });
-    } else {
-      res.status(500).json({
-        success: false,
-        error: 'Failed to delete file from Cloudinary',
-        result: result.result
-      });
-    }
+    
+    fs.unlinkSync(fullPath);
+    
+    res.json({
+      success: true,
+      message: 'File deleted successfully'
+    });
   } catch (error) {
     console.error('Delete file error:', error);
-    res.status(500).json({ 
-      success: false,
-      error: error.message 
-    });
+    res.status(500).json({ error: error.message });
   }
 });
 

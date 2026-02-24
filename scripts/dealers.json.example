@@ -1,0 +1,20 @@
+[
+  {
+    "company": "Donar Boats",
+    "country": "Croatia",
+    "address": "Riva 1, 52100 Pula, Croatia",
+    "telephone": "+385 98 802 328",
+    "fax": "+385 52 350 822",
+    "email": "donarboats@gmail.com",
+    "website": "http://www.donarboats.hr/hr"
+  },
+  {
+    "company": "Tiger Marine CENTER",
+    "country": "Netherlands",
+    "address": "Delftweg 129, 3043 NH Rotterdam, Netherlands",
+    "telephone": null,
+    "fax": null,
+    "email": null,
+    "website": "http://www.tigermarinecenter.nl"
+  }
+]

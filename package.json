@@ -21,7 +21,8 @@
     "add:interior-column": "node scripts/addInteriorMainImageColumn.js",
     "test:db": "node scripts/checkConnection.js",
     "check:db": "node scripts/checkDatabase.js",
-    "list:cloudinary": "node scripts/listCloudinaryImages.js"
+    "list:cloudinary": "node scripts/listCloudinaryImages.js",
+    "migrate:dealers": "node scripts/migrateDealers.js"
   },
   "keywords": [
     "tiger-marine",
