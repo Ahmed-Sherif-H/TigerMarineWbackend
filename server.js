@@ -89,6 +89,7 @@ app.use('/images', express.static(path.join(publicPath, 'images'), {
 app.use('/Customizer-images', express.static(path.join(publicPath, 'Customizer-images')));
 
 // Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/models', require('./routes/models'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/upload', require('./routes/upload'));
