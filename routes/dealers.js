@@ -3,11 +3,11 @@ const router = express.Router();
 const dealersController = require('../controllers/dealersController');
 const { authenticate } = require('../middleware/auth');
 
-// Get all dealers (requires authentication)
-router.get('/', authenticate, (req, res) => dealersController.getAllDealers(req, res));
+// Get all dealers (public)
+router.get('/', (req, res) => dealersController.getAllDealers(req, res));
 
-// Get single dealer by ID (requires authentication)
-router.get('/:id', authenticate, (req, res) => dealersController.getDealerById(req, res));
+// Get single dealer by ID (public)
+router.get('/:id', (req, res) => dealersController.getDealerById(req, res));
 
 // Create new dealer (admin only)
 router.post('/', authenticate, (req, res) => dealersController.createDealer(req, res));
