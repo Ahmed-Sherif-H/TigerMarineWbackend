@@ -1,3 +1,4 @@
+const path = require('path');
 const { prisma } = require('../config/database');
 
 class ModelsService {
@@ -447,12 +448,15 @@ class ModelsService {
       return trimmed; // Store Cloudinary URL directly
     }
     
-    // If it's already just a filename, return it
-    if (!trimmed.includes('/')) {
-      return trimmed;
+    // Normalize accidental Windows paths or mixed slashes
+    const normalized = trimmed.replace(/\\/g, '/');
+
+    // API-relative paths from upload (e.g. /images/Model/file.jpg) → filename only for model fields
+    if (normalized.startsWith('/images/') || normalized.startsWith('/Customizer-images/')) {
+      return normalized.split('/').filter(Boolean).pop() || null;
     }
-    // If it's a path, extract just the filename
-    return trimmed.split('/').pop().trim();
+
+    return path.basename(normalized);
   }
 
   // Helper function to build image URL
@@ -538,7 +542,7 @@ class ModelsService {
         return this.buildImagePath(modelName, vid.filename);
       }).filter(Boolean) || [],
       interiorFiles: model.interiorFiles?.map(int => {
-        return this.buildImagePath(modelName, int.filename);
+        return this.buildImagePath(modelName, int.filename, true);
       }).filter(Boolean) || []
     };
     

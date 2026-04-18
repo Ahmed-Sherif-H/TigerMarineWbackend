@@ -2,8 +2,6 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs-extra');
-const { modelsService } = require('../services/modelsService');
-
 const router = express.Router();
 
 // Helper to get model folder name (maps SL480 -> SportLine480, etc.)
@@ -27,6 +25,58 @@ function getModelFolderName(modelName) {
     'Striker 330': 'Striker 330'
   };
   return folderMap[modelName] || modelName;
+}
+
+/** URL path segment (folder or filename) for use in /images/... URLs */
+function encodePathPart(part) {
+  return encodeURIComponent(String(part));
+}
+
+/**
+ * Public URL (for <img src> after prefixing API origin) and storage path under public/
+ * so clients never need the absolute disk path from multer.
+ */
+function buildPublicPaths(body, filename) {
+  const folder = body.folder;
+  const file = encodePathPart(filename);
+
+  if (folder === 'customizer') {
+    const { modelName, partName } = body;
+    const storagePath = ['Customizer-images', modelName, partName, filename].join('/');
+    const url = `/${['Customizer-images', encodePathPart(modelName), encodePathPart(partName), file].join('/')}`;
+    return { url, storagePath };
+  }
+
+  if (folder === 'categories') {
+    const { categoryName } = body;
+    const storagePath = ['images', 'categories', categoryName, filename].join('/');
+    const url = `/${['images', 'categories', encodePathPart(categoryName), file].join('/')}`;
+    return { url, storagePath };
+  }
+
+  if (folder === 'images') {
+    const modelName = String(body.modelName || '').trim();
+    const folderName = getModelFolderName(modelName);
+    if (body.subfolder === 'Interior') {
+      const storagePath = ['images', folderName, 'Interior', filename].join('/');
+      const url = `/${['images', encodePathPart(folderName), 'Interior', file].join('/')}`;
+      return { url, storagePath };
+    }
+    const storagePath = ['images', folderName, filename].join('/');
+    const url = `/${['images', encodePathPart(folderName), file].join('/')}`;
+    return { url, storagePath };
+  }
+
+  return { url: null, storagePath: null };
+}
+
+function absolutePublicUrl(req, urlPath) {
+  if (!urlPath) return null;
+  const configured = (process.env.PUBLIC_API_BASE_URL || '').replace(/\/$/, '');
+  if (configured) return `${configured}${urlPath}`;
+  const host = req.get('host');
+  if (!host) return null;
+  return `${req.protocol}://${host}${urlPath}`;
 }
 
 // Error handler for multer
@@ -220,11 +270,18 @@ router.post('/single', (req, res, next) => {
     
     console.log('✅ File uploaded successfully:', fileName);
     console.log('  Saved to:', filePath);
-    
+
+    const { url, storagePath } = buildPublicPaths(req.body, fileName);
+    const absoluteUrl = absolutePublicUrl(req, url);
+    if (url) console.log('  Public URL path:', url);
+
     res.json({
       success: true,
       message: 'File uploaded successfully',
       filename: fileName,
+      url,
+      absoluteUrl,
+      storagePath,
       path: filePath,
       size: req.file.size
     });
@@ -261,11 +318,17 @@ router.post('/multiple', (req, res, next) => {
       });
     }
     
-    const uploadedFiles = req.files.map(file => ({
-      filename: file.filename,
-      path: file.path,
-      size: file.size
-    }));
+    const uploadedFiles = req.files.map((file) => {
+      const { url, storagePath } = buildPublicPaths(req.body, file.filename);
+      return {
+        filename: file.filename,
+        url,
+        absoluteUrl: absolutePublicUrl(req, url),
+        storagePath,
+        path: file.path,
+        size: file.size
+      };
+    });
     
     console.log('✅ Files uploaded successfully:', uploadedFiles.length);
     res.json({
@@ -327,8 +390,9 @@ router.delete('/delete', (req, res) => {
     if (!filePath) {
       return res.status(400).json({ error: 'File path is required' });
     }
-    
-    const fullPath = path.join(__dirname, '../public', filePath);
+
+    const relative = String(filePath).replace(/^[/\\]+/, '');
+    const fullPath = path.join(__dirname, '../public', relative);
     
     if (!fs.existsSync(fullPath)) {
       return res.status(404).json({ error: 'File not found' });
